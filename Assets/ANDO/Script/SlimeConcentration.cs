@@ -51,7 +51,9 @@ public class SlimeConcentration : MonoBehaviour
 			Vector3 dir = this.transform.position - ob.position;
 			if (dir.magnitude <= m_together_rad)
 			{
-				ob.transform.position += dir.normalized * ConcentrationPower * Time.deltaTime;
+				Rigidbody rb = ob.gameObject.GetComponent<Rigidbody>();
+				rb.AddForce(dir.normalized * ConcentrationPower * Time.deltaTime);
+				//ob.transform.position += dir.normalized * ConcentrationPower * Time.deltaTime;
 			}
 
 		}
