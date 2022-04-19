@@ -55,3 +55,4 @@ sysinfo.txt
 crashlytics-build.properties
 ~*
 .DS_Store
+Logs/AssetImportWorker0-prev.log
