@@ -15,12 +15,14 @@ public class SlimeCoreController : MonoBehaviour
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
+        Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y,Vector3.up);
         Jump();
+        SlimeMove();
     }
 
     private void FixedUpdate()
     {
-        SlimeMove();
+        
     }
 
     [SerializeField] private Vector3 velocity;         // 移動方向
@@ -28,10 +30,12 @@ public class SlimeCoreController : MonoBehaviour
 
     float inputHorizontal;
     float inputVertical;
+    Quaternion Horizontalrotation;
     Rigidbody rb;
 
     void SlimeMove()
     {
+        var velo = Horizontalrotation * new Vector3(inputHorizontal, 0, inputVertical).normalized;
         // カメラの方向から、X-Z平面の単位ベクトルを取得
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
 
@@ -40,6 +44,7 @@ public class SlimeCoreController : MonoBehaviour
 
         // 移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
         rb.velocity = moveForward * moveSpeed + new Vector3(0, rb.velocity.y, 0);
+        //rb.AddForce(velo * moveSpeed,ForceMode.Force);
 
         // キャラクターの向きを進行方向に
         if (moveForward != Vector3.zero)

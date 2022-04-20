@@ -16,25 +16,8 @@ public class SlimeConcentration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		//SlimeTogether(m_slime);
 		SlimeTogetherLeave(m_slime);
     }
-
-	void SlimeTogether(GameObject obj)
-	{
-		Transform children = obj.GetComponentInChildren<Transform>();
-		//éqóvëfÇ™Ç¢Ç»ÇØÇÍÇŒèIóπ
-		if (children.childCount == 0)
-		{
-			return;
-		}
-		foreach (Transform ob in children)
-		{
-			Vector3 dir = this.transform.position - ob.position;
-			ob.transform.position += dir.normalized * ConcentrationPower * Time.deltaTime;
-
-		}
-	}
 
 	[SerializeField] public float m_together_rad;
 
