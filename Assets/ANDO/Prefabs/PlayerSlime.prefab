@@ -7914,7 +7914,7 @@ GameObject:
   - component: {fileID: 8341961091832487843}
   - component: {fileID: 8341961091832487842}
   - component: {fileID: 8341961091832487773}
-  - component: {fileID: 8341961091832487772}
+  - component: {fileID: 7248905367796653259}
   m_Layer: 3
   m_Name: SlimeCore
   m_TagString: Untagged
@@ -8030,7 +8030,7 @@ MonoBehaviour:
   moveSpeed: 4
   upForce: 400
   isGround: 0
---- !u!114 &8341961091832487772
+--- !u!114 &7248905367796653259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8039,11 +8039,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8341961091832487774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35f970601df99b3449340bae2b0da7cb, type: 3}
+  m_Script: {fileID: 11500000, guid: a551b060bb58e7f42be48bdebe47cebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_slime: {fileID: 8341961092122062143}
-  ConcentrationPower: 1500
+  ConcentrationPower: 1000
   m_together_rad: 7
 --- !u!1 &8341961091834368691
 GameObject:
