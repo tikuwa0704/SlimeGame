@@ -10,6 +10,7 @@ public class SlimeRender : MonoBehaviour
     private SphereCollider[] _colliders;
     private Vector4[] _colors = new Vector4[MaxSphereCount];
     private readonly float[] _spheres_state = new float[MaxSphereCount];
+    private readonly float[] _alpha = new float[MaxSphereCount];
 
     private void Start()
     {

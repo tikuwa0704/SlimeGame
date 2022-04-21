@@ -92,25 +92,27 @@ float getDistance(float3 pos)
 
 
 fixed3 _Colors[MAX_SPHERE_COUNT]; // 球の色を格納した配列
+float _Alpha[MAX_SPHERE_COUNT]; //球のアルファ値を格納した配列
 float _SpheresState[MAX_SPHERE_COUNT];//球の状態を格納した配列
 
 fixed3 getColor(const float3 pos)
 {
     fixed3 color = fixed3(0, 0, 0);
     float weight = 0.01;
+    float alpha = 0;
     for (int i = 0; i < _SphereCount; i++)
     {
-            const float distinctness = 0.7;
-            const float4 sphere = _Spheres[i];
-            const float x = clamp((length(sphere.xyz - pos) - sphere.w) * distinctness, 0, 1);
-            const float t = 1.0 - x * x * (3.0 - 2.0 * x);
-            color += t * _Colors[i];
-            
-            weight += t;
- 
-        }
+        const float distinctness = 0.7;
+        const float4 sphere = _Spheres[i];
+        const float x = clamp((length(sphere.xyz - pos) - sphere.w) * distinctness, 0, 1);
+        const float t = 1.0 - x * x * (3.0 - 2.0 * x);
+        color += t * _Colors[i];
+        alpha = _Alpha[i];
+        weight += t;
+
+    }
     color /= weight;
-    return float4(color, 1);
+    return float4(color, alpha);
 }
 
 float3 getNormal(const float3 pos)
@@ -153,18 +155,7 @@ output frag(const v2f i)
             float highlight = dot(norm, halfDir) > 0.99 ? 1 : 0; // ハイライト
             fixed3 color = clamp(lerp(baseColor, rimColor, rimRate) + highlight, 0, 1); // 色
             
-            /*
-            float alpha = 0;
-            for (int i = 0; i < _SphereCount; i++)
-            {
-                if (_SpheresState[i] == 1) {
-                    
-                }
-                else {
-                    alpha = 0; // 不透明度
-                }
-            }*/
-            float alpha = clamp(lerp(0.2, 4, rimRate) + highlight, 0, 1); // 不透明度
+             float alpha = clamp(lerp(0.2, 4, rimRate) + highlight, 0, 1); // 不透明度
             
             o.col = fixed4(color,alpha); // 塗りつぶし
             o.depth = getDepth(pos); // 深度書き込み
