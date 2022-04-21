@@ -8,6 +8,7 @@ public class SlimeContoroller : MonoBehaviour
     public enum E_SLIME_STATE{
         eIdle,
         eCold,
+        eHot,
     }
 
     [SerializeField] public bool m_is_sticking;
@@ -19,7 +20,7 @@ public class SlimeContoroller : MonoBehaviour
     {
         m_is_sticking = true;
 
-        m_state = E_SLIME_STATE.eIdle;
+        m_state = E_SLIME_STATE.eHot;
     }
 
     // Update is called once per frame

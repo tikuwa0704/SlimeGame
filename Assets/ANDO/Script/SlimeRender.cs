@@ -11,6 +11,7 @@ public class SlimeRender : MonoBehaviour
     private Vector4[] _colors = new Vector4[MaxSphereCount];
     private readonly float[] _spheres_state = new float[MaxSphereCount];
     private readonly float[] _alpha = new float[MaxSphereCount];
+    public float[] _state = new float[MaxSphereCount];
 
     private void Start()
     {
@@ -28,6 +29,8 @@ public class SlimeRender : MonoBehaviour
 
                // シェーダー側の _Colors を更新
         material.SetVectorArray("_Colors", _colors);
+
+        material.SetInt("k", 0);
     }
 
     private void Update()
@@ -48,6 +51,7 @@ public class SlimeRender : MonoBehaviour
 
             //_spheres_state[i] = 1;
             int _state = (int)col.gameObject.GetComponent<SlimeContoroller>().m_state;
+            _spheres_state[i] = _state;
 
             if (_state == 0)
             {
@@ -55,7 +59,7 @@ public class SlimeRender : MonoBehaviour
             }
             else if (_state == 1)
             {
-                _colors[i] = new Vector4(0, 0, 1, 0);
+                //_colors[i] = new Vector4(0, 0, 1, 0);
             }
         }
 
@@ -64,7 +68,16 @@ public class SlimeRender : MonoBehaviour
         material.SetVectorArray("_Colors", _colors);
         material.SetFloatArray("_SphereState", _spheres_state);
 
-        //Debug.Log(material.GetInt("_SphereState2"));
+        _state = material.GetFloatArray("_SphereState");
+
+
+        if (Input.GetKeyDown("z"))
+        {
+            material.SetInt("k", 1);
+           
+        }
+
+            Debug.Log(material.GetInt("k"));
         
     }
 }

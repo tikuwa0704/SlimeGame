@@ -71,8 +71,9 @@ Shader "Slime/Step9"
     }
 
  #define MAX_SPHERE_COUNT 256 // 最大の球の個数
- float4 _Spheres[MAX_SPHERE_COUNT]; // 球の座標・半径を格納した配列
-int _SphereCount; // 処理する球の個数
+    float4 _Spheres[MAX_SPHERE_COUNT]; // 球の座標・半径を格納した配列
+    int _SphereCount; // 処理する球の個数
+    float _SpheresState[MAX_SPHERE_COUNT];//球の状態を格納した配列
 
 // smooth min関数
 float smoothMin(float x1, float x2, float k)
@@ -85,7 +86,9 @@ float getDistance(float3 pos)
     for (int i = 0; i < _SphereCount; i++)
     {
 
-        dist = smoothMin(dist, sphereDistanceFunction(_Spheres[i], pos), 3);
+        if (_SpheresState[i] == 0) {
+            dist = smoothMin(dist, sphereDistanceFunction(_Spheres[i], pos), 3);
+        }
     }
     return dist;
 }
@@ -93,7 +96,7 @@ float getDistance(float3 pos)
 
 fixed3 _Colors[MAX_SPHERE_COUNT]; // 球の色を格納した配列
 float _Alpha[MAX_SPHERE_COUNT]; //球のアルファ値を格納した配列
-float _SpheresState[MAX_SPHERE_COUNT];//球の状態を格納した配列
+int k;
 
 fixed3 getColor(const float3 pos)
 {
@@ -106,7 +109,14 @@ fixed3 getColor(const float3 pos)
         const float4 sphere = _Spheres[i];
         const float x = clamp((length(sphere.xyz - pos) - sphere.w) * distinctness, 0, 1);
         const float t = 1.0 - x * x * (3.0 - 2.0 * x);
-        color += t * _Colors[i];
+        //k = _SpheresState[i];
+        if (k == 0) {
+             color += t * _Colors[i];
+        }
+        else {
+            color = fixed3(0, 0, 1);
+        }
+       
         alpha = _Alpha[i];
         weight += t;
 
@@ -114,6 +124,8 @@ fixed3 getColor(const float3 pos)
     color /= weight;
     return float4(color, alpha);
 }
+
+float getAlpha
 
 float3 getNormal(const float3 pos)
  {

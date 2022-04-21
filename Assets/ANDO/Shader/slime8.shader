@@ -97,14 +97,14 @@ fixed3 getColor(const float3 pos)
     fixed3 color = fixed3(0, 0, 0);
     float weight = 0.01;
     for (int i = 0; i < _SphereCount; i++)
-         {
+    {
         const float distinctness = 0.7;
         const float4 sphere = _Spheres[i];
         const float x = clamp((length(sphere.xyz - pos) - sphere.w) * distinctness, 0, 1);
         const float t = 1.0 - x * x * (3.0 - 2.0 * x);
         color += t * _Colors[i];
         weight += t;
-        }
+    }
      color /= weight;
     return float4(color, 1);
     }
@@ -142,7 +142,7 @@ output frag(const v2f i)
             fixed3 norm = getNormal(pos); // 法線
             fixed3 baseColor = getColor(pos); // ベースとなる色
 
-                const float rimPower = 2; // 定数
+            const float rimPower = 2; // 定数
             const float rimRate = pow(1 - abs(dot(norm, rayDir)), rimPower); // 輪郭らしさの指標
             const fixed3 rimColor = fixed3(1.5, 1.5, 1.5); // 輪郭の色
 
