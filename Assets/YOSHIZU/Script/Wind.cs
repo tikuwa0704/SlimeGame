@@ -4,5 +4,29 @@ using UnityEngine;
 
 public class Wind : MonoBehaviour
 {
-    //X軸咆哮
+    //X軸方向の加える風の力
+    public float WindX = 0f;
+
+    //Y軸方向の加える風の力
+    public float WindY = 0f;
+
+    //Z軸方向の加える風の力
+    public float WindZ = 0f;
+
+    /// <summary>
+    /// トリガーの範囲に入っている間ずっと実行される
+    /// </summary>
+    /// <param name="Other"></param>
+    private void OnTriggerStay(Collider Other)
+    {
+        // 当たった相手のrigidbodyコンポーネントを取得
+        Rigidbody OtherRigidbody = Other.GetComponent<Rigidbody>();
+
+        // rigidbodyがnullではない場合（相手のGameObjectにrigidbodyが付いている場合）
+        if (OtherRigidbody != null)
+        {
+            // 相手のrigidbodyに力を加える
+            OtherRigidbody.AddForce(WindX, WindY, WindZ, ForceMode.Force);
+        }
+    }
 }
