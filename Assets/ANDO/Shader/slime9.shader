@@ -86,20 +86,19 @@ float getDistance(float3 pos)
     {
 
         dist = smoothMin(dist, sphereDistanceFunction(_Spheres[i], pos), 3);
+
     }
     return dist;
 }
 
 
 fixed3 _Colors[MAX_SPHERE_COUNT]; // 球の色を格納した配列
-float _Alpha[MAX_SPHERE_COUNT]; //球のアルファ値を格納した配列
-float _SpheresState[MAX_SPHERE_COUNT];//球の状態を格納した配列
+
 
 fixed3 getColor(const float3 pos)
 {
     fixed3 color = fixed3(0, 0, 0);
     float weight = 0.01;
-    float alpha = 0;
     for (int i = 0; i < _SphereCount; i++)
     {
         const float distinctness = 0.7;
@@ -107,12 +106,11 @@ fixed3 getColor(const float3 pos)
         const float x = clamp((length(sphere.xyz - pos) - sphere.w) * distinctness, 0, 1);
         const float t = 1.0 - x * x * (3.0 - 2.0 * x);
         color += t * _Colors[i];
-        alpha = _Alpha[i];
         weight += t;
 
     }
     color /= weight;
-    return float4(color, alpha);
+    return float4(color, 1);
 }
 
 float3 getNormal(const float3 pos)

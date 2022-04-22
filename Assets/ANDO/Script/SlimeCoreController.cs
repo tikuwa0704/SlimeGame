@@ -13,12 +13,23 @@ public class SlimeCoreController : MonoBehaviour
     Quaternion Horizontalrotation;
     Rigidbody rb;
 
+    public enum SLIME_CORE_STATE
+    {
+        IDLE,
+        COLD,
+    }
+
+    [Header("スライムの状態")]
+    [SerializeField] public SLIME_CORE_STATE m_state;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         target_scale = this.transform.localScale;
         t = 1.0f;
+
+        m_state = SLIME_CORE_STATE.IDLE;
     }
 
     
@@ -30,7 +41,7 @@ public class SlimeCoreController : MonoBehaviour
         Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y,Vector3.up);
         Jump();
         SlimeMove();
-        ChangeState(m_slime);
+        //ChangeState(m_slime);
         ChageScale();
     }
 
@@ -57,6 +68,7 @@ public class SlimeCoreController : MonoBehaviour
     [Header("着地しているかどうか")]
     [SerializeField] private bool isGround; //着地しているかどうかの判定
 
+    [SerializeField] public GameObject cold_effect;
     void Jump()
     {
         if (isGround == true)//着地しているとき
@@ -78,52 +90,57 @@ public class SlimeCoreController : MonoBehaviour
     void ChangeState(GameObject obj)
     {
 
-        if (Input.GetKeyDown("z"))
+
+
+        Transform children = obj.GetComponentInChildren<Transform>();
+        //子要素がいなければ終了
+        if (children.childCount == 0)
+        {
+            return;
+        }
+
+        foreach (Transform ob in children)
         {
 
-            Transform children = obj.GetComponentInChildren<Transform>();
-            //子要素がいなければ終了
-            if (children.childCount == 0)
+            SlimeContoroller slime_con = ob.gameObject.GetComponent<SlimeContoroller>();
+
+            if (slime_con.m_is_sticking)
             {
-                return;
-            }
-            
-            foreach (Transform ob in children)
-            {
+                //引っ張られている子スライムの状態をコールドに
+                slime_con.m_state = SlimeContoroller.E_SLIME_STATE.eCold;
 
-                SlimeContoroller slime_con = ob.gameObject.GetComponent<SlimeContoroller>();
-
-                if (slime_con.m_is_sticking)
-                {
-                    //引っ張られている子スライムの状態をコールドに
-                   slime_con.m_state = SlimeContoroller.E_SLIME_STATE.eCold;
-
-                    //メッシュを四角に変更
-                    //this.GetComponent<MeshFilter>().mesh = Cube;
-                    //マテリアルを氷に
-                    this.GetComponent<MeshRenderer>().material = _material[1];
-                    //スフィアコライダーをＯＦＦに
-                    //this.GetComponent<SphereCollider>().enabled = false;
-                    //ＢＯＸコライダーをＯＮに
-                    //this.GetComponent<BoxCollider>().enabled = true;
-
-                    //子スライムの数の割合で氷になった時の大きさが変わる
-                    int slime_num = this.GetComponent<SlimeConcentration>().m_sticking_slime_num;
-
-                    //最大値
-                    float scale_max = 3.0f;
-                    float per = slime_num / 100f;
-
-                    target_scale = new Vector3(per, per, per)*scale_max;
-
-                    t = 0.0f;
-                }
-               
-
+                slime_con.gameObject.SetActive(false);
             }
 
-            
         }
+
+        {
+            //メッシュを四角に変更
+            //this.GetComponent<MeshFilter>().mesh = Cube;
+            //マテリアルを氷に
+            this.GetComponent<MeshRenderer>().material = _material[1];
+            //スフィアコライダーをＯＦＦに
+            //this.GetComponent<SphereCollider>().enabled = false;
+            //ＢＯＸコライダーをＯＮに
+            //this.GetComponent<BoxCollider>().enabled = true;
+
+            //子スライムの数の割合で氷になった時の大きさが変わる
+            int slime_num = this.GetComponent<SlimeConcentration>().m_sticking_slime_num;
+
+            //最大値
+            float scale_max = 4.0f;
+            float per = slime_num / 100f;
+
+            target_scale = new Vector3(per, per, per) * scale_max;
+
+            t = 0.0f;
+
+            GameObject effect = Instantiate(cold_effect, this.transform);
+            Destroy(effect,0.5f);
+        }
+
+
+
 
 
     }
@@ -136,7 +153,7 @@ public class SlimeCoreController : MonoBehaviour
         if (t <= 1)
         {
             this.transform.localScale = this.transform.localScale * (1 - t) + target_scale * t;
-            t += Time.deltaTime / 3.0f;
+            t += Time.deltaTime / 5.0f;
         }
     }
 
@@ -146,6 +163,17 @@ public class SlimeCoreController : MonoBehaviour
         {
             isGround = true; //isGroundをtrueにする
         }
+
+       
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+         if (other.gameObject.CompareTag("ColdWind")) 
+        {
+            if (m_state != SLIME_CORE_STATE.COLD) ChangeState(m_slime);
+        }
+    }
+
+
 }
