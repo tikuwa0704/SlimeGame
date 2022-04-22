@@ -41,7 +41,6 @@ public class SlimeCoreController : MonoBehaviour
         Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y,Vector3.up);
         Jump();
         SlimeMove();
-        //ChangeState(m_slime);
         ChageScale();
     }
 
@@ -73,24 +72,29 @@ public class SlimeCoreController : MonoBehaviour
     {
         if (isGround == true)//着地しているとき
         {
-            if (Input.GetKeyDown("space"))
-            {
-                isGround = false;//  isGroundをfalseにする
-                rb.AddForce(new Vector3(0, upForce, 0)); //上に向かって力を加える
-            }
+            if (m_state == SLIME_CORE_STATE.COLD) return;
+            
+
+                if (Input.GetKeyDown("space"))
+                {
+                    isGround = false;//  isGroundをfalseにする
+                    rb.AddForce(new Vector3(0, upForce, 0)); //上に向かって力を加える
+                }
+            
         }
     }
 
-    [Header("四角のメッシュ")]
-    [SerializeField] public Mesh Cube;
+    
     [Header("氷のマテリアル")]
     [SerializeField] public Material[] _material;
     [SerializeField] public Vector3 target_scale;
 
+    [SerializeField] public PhysicMaterial[] _physicMaterial;
+
     void ChangeState(GameObject obj)
     {
 
-
+        m_state = SLIME_CORE_STATE.COLD;
 
         Transform children = obj.GetComponentInChildren<Transform>();
         //子要素がいなければ終了
@@ -124,11 +128,13 @@ public class SlimeCoreController : MonoBehaviour
             //ＢＯＸコライダーをＯＮに
             //this.GetComponent<BoxCollider>().enabled = true;
 
+            this.GetComponent<SphereCollider>().material = _physicMaterial[1];
+
             //子スライムの数の割合で氷になった時の大きさが変わる
             int slime_num = this.GetComponent<SlimeConcentration>().m_sticking_slime_num;
 
             //最大値
-            float scale_max = 4.0f;
+            float scale_max = 3.0f;
             float per = slime_num / 100f;
 
             target_scale = new Vector3(per, per, per) * scale_max;
@@ -136,7 +142,7 @@ public class SlimeCoreController : MonoBehaviour
             t = 0.0f;
 
             GameObject effect = Instantiate(cold_effect, this.transform);
-            Destroy(effect,0.5f);
+            Destroy(effect,3.0f);
         }
 
 

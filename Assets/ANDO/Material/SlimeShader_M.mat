@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SlimePlane
+  m_Name: SlimeShader_M
   m_Shader: {fileID: 4800000, guid: 29e0c7fc8c65e5042b79e22be293e605, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

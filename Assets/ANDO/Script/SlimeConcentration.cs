@@ -25,12 +25,16 @@ public class SlimeConcentration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		
 		SlimeTogetherLeave(m_slime);
     }
 
 	void SlimeTogetherLeave(GameObject obj)
 	{
-		Transform children = obj.GetComponentInChildren<Transform>();
+		if (GetComponent<SlimeCoreController>().m_state == SlimeCoreController.SLIME_CORE_STATE.COLD) return;
+
+
+			Transform children = obj.GetComponentInChildren<Transform>();
 		//éqóvëfÇ™Ç¢Ç»ÇØÇÍÇŒèIóπ
 		if (children.childCount == 0)
 		{
