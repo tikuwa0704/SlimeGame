@@ -19,14 +19,18 @@ public class Wind : MonoBehaviour
     /// <param name="Other"></param>
     private void OnTriggerStay(Collider Other)
     {
-        // 当たった相手のrigidbodyコンポーネントを取得
-        Rigidbody OtherRigidbody = Other.GetComponent<Rigidbody>();
-
-        // rigidbodyがnullではない場合（相手のGameObjectにrigidbodyが付いている場合）
-        if (OtherRigidbody != null)
+        if (Other.gameObject.tag == "Player")
         {
-            // 相手のrigidbodyに力を加える
-            OtherRigidbody.AddForce(WindX, WindY, WindZ, ForceMode.Force);
+            // 当たった相手のrigidbodyコンポーネントを取得
+            Rigidbody OtherRigidbody = Other.GetComponent<Rigidbody>();
+
+            // rigidbodyがnullではない場合（相手のGameObjectにrigidbodyが付いている場合）
+            if (OtherRigidbody != null)
+            {
+                // 相手のrigidbodyに力を加える
+                OtherRigidbody.AddForce(WindX, WindY, WindZ, ForceMode.Force);
+            }
         }
+      
     }
 }
