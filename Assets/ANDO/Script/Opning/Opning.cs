@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class Opning : MonoBehaviour
 {
-    [SerializeField] SoundManager soundManager;
-
+    
     GameObject botton;
 
     Image m_img;
@@ -22,7 +21,8 @@ public class Opning : MonoBehaviour
 
         t = 1.0f;
 
-        soundManager.Play("test");
+        ServiceLocator<ISoundService>.Instance.Play("test",true);
+        ServiceLocator<ISoundService>.Instance.Play("test", true);
     }
 
     // Update is called once per frame
@@ -35,10 +35,29 @@ public class Opning : MonoBehaviour
             t -= Time.deltaTime / 3.0f;
             if (t < 0)
             {
-                botton.GetComponent<Button>().enabled = true;
-                this.GetComponent<Opning>().enabled = false;
+                botton.GetComponent<Button>().enabled = true;              
             }
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            ServiceLocator<ISoundService>.Instance.Stop("test");
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            ServiceLocator<ISoundService>.Instance.ChangeMute("test");
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ServiceLocator<ISoundService>.Instance.RePlay("test");
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            ServiceLocator<ISoundService>.Instance.Stop();// Pause("test");
         }
     }
 }
