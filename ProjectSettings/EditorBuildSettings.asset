@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ANDO/Scenes/OpeningScene.unity
+    guid: 51084903d9650d7428dcb554866ca96b
+  - enabled: 1
+    path: Assets/ANDO/Scenes/SlimeTestScene.unity
+    guid: 4b5e80f02f05ea145b39356547da7ee7
   m_configObjects: {}
