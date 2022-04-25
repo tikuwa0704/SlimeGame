@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stone : MonoBehaviour
 {
-    public GameObject StonePrefab;//炎や氷のブレスを放つ
+    public GameObject StonePrefab;//石を放つ
     public float speed;  // 移動スピード;
     public float timeOut;
     private float timeElapsed;
