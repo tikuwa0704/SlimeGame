@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SlimeCoreController : MonoBehaviour
 {
-    
+    [Header("スライムが動くかどうか")]
+    public static bool isActive = true;
+
     [Header("子スライム群")]
     [SerializeField] public GameObject m_slime;
 
@@ -28,20 +30,23 @@ public class SlimeCoreController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         target_scale = this.transform.localScale;
         t = 1.0f;
-
+       
         m_state = SLIME_CORE_STATE.IDLE;
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
-        Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y,Vector3.up);
-        Jump();
-        SlimeMove();
-        ChageScale();
+        Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up);
+        if (isActive)
+        {
+            Jump();
+            SlimeMove();
+            ChageScale();
+        }
     }
 
     [Header("移動方向")]
