@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8536048276935654880}
   m_Layer: 0
   m_Name: "\u5929\u4E95"
-  m_TagString: Untagged
+  m_TagString: Syougaibutu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
