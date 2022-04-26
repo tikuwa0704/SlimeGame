@@ -34,6 +34,8 @@ public class SoundManager : MonoBehaviour,ISoundService
 
     private void Awake()
     {
+        DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
+
         //auidioSourceList”z—ñ‚Ì”‚¾‚¯AudioSource‚ğ©•ª©g‚É¶¬‚µ‚Ä”z—ñ‚ÉŠi”[
         for (var i = 0; i < audioSourceList.Length; ++i)
         {

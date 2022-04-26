@@ -20,9 +20,6 @@ public class Opning : MonoBehaviour
         m_img = GetComponent<Image>();
 
         t = 1.0f;
-
-        ServiceLocator<ISoundService>.Instance.Play("test",true);
-        ServiceLocator<ISoundService>.Instance.Play("test", true);
     }
 
     // Update is called once per frame
@@ -38,26 +35,6 @@ public class Opning : MonoBehaviour
                 botton.GetComponent<Button>().enabled = true;              
             }
 
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ServiceLocator<ISoundService>.Instance.Stop("test");
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            ServiceLocator<ISoundService>.Instance.ChangeMute("test");
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ServiceLocator<ISoundService>.Instance.RePlay("test");
-        }
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            ServiceLocator<ISoundService>.Instance.Stop();// Pause("test");
         }
     }
 }

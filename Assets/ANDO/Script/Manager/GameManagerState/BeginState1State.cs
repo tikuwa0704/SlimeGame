@@ -25,6 +25,7 @@ public class BeginState1State : State<GameManager>
         SlimeCoreController.isActive = false;
         Player.GetComponentInChildren<Cinemachine.CinemachineFreeLook>().enabled = false;
 
+        
     }
 
     public override void Execute()

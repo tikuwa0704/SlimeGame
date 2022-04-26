@@ -30,7 +30,7 @@ public class SlimeCoreController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         target_scale = this.transform.localScale;
         t = 1.0f;
-       
+        total_vel = 0;
         m_state = SLIME_CORE_STATE.IDLE;
     }
 
@@ -54,6 +54,8 @@ public class SlimeCoreController : MonoBehaviour
     [Header("移動速度")]
     [SerializeField] private float moveSpeed = 5.0f;   // 移動速度
 
+    float total_vel;
+
     void SlimeMove()
     {
         var velo = Horizontalrotation * new Vector3(inputHorizontal, 0, inputVertical).normalized;
@@ -63,6 +65,12 @@ public class SlimeCoreController : MonoBehaviour
         // キャラクターの向きを進行方向に
         if (velo != Vector3.zero)
         {
+            total_vel += velo.magnitude * Time.deltaTime;
+            if(total_vel>= 2.0f)
+            {
+                GetComponent<SlimeAudio>().PlayFootstepSE();
+                total_vel = 0;
+            }
             transform.rotation = Quaternion.LookRotation(velo);
         }
     }
@@ -173,6 +181,7 @@ public class SlimeCoreController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground")) //Groundタグのオブジェクトに触れたとき
         {
             isGround = true; //isGroundをtrueにする
+            GetComponent<SlimeAudio>().PlayFootstepSE();
         }
 
        

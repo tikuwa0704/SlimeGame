@@ -25,7 +25,7 @@ public class ExeState1State : State<GameManager>
 
         count_text = GameObject.Find("StageStartText");
         count_text.GetComponent<CountDownNumber>().enabled = true;
-
+        ServiceLocator<ISoundService>.Instance.Play("カウントダウン");
     }
 
     public override void Execute()
