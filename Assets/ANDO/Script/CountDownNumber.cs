@@ -8,7 +8,7 @@ public class CountDownNumber : MonoBehaviour
 
     [SerializeField] Text countDownNumber;
 
-    [SerializeField] float time;
+    [SerializeField] public float time;
    
     // Start is called before the first frame update
     void Start()
