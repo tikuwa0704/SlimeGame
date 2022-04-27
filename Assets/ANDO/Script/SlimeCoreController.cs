@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SlimeCoreController : MonoBehaviour
 {
-    
+    [Header("スライムが動くかどうか")]
+    public static bool isActive = true;
+
     [Header("子スライム群")]
     [SerializeField] public GameObject m_slime;
 
@@ -28,26 +30,31 @@ public class SlimeCoreController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         target_scale = this.transform.localScale;
         t = 1.0f;
-
+        total_vel = 0;
         m_state = SLIME_CORE_STATE.IDLE;
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
-        Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y,Vector3.up);
-        Jump();
-        SlimeMove();
-        ChageScale();
+        Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up);
+        if (isActive)
+        {
+            Jump();
+            SlimeMove();
+            ChageScale();
+        }
     }
 
     [Header("移動方向")]
     [SerializeField] private Vector3 velocity;         // 移動方向
     [Header("移動速度")]
     [SerializeField] private float moveSpeed = 5.0f;   // 移動速度
+
+    float total_vel;
 
     void SlimeMove()
     {
@@ -58,6 +65,12 @@ public class SlimeCoreController : MonoBehaviour
         // キャラクターの向きを進行方向に
         if (velo != Vector3.zero)
         {
+            total_vel += velo.magnitude * Time.deltaTime;
+            if(total_vel>= 2.0f)
+            {
+                GetComponent<SlimeAudio>().PlayFootstepSE();
+                total_vel = 0;
+            }
             transform.rotation = Quaternion.LookRotation(velo);
         }
     }
@@ -168,6 +181,7 @@ public class SlimeCoreController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground")) //Groundタグのオブジェクトに触れたとき
         {
             isGround = true; //isGroundをtrueにする
+            GetComponent<SlimeAudio>().PlayFootstepSE();
         }
 
        

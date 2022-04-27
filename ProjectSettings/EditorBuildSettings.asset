@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/ANDO/Scenes/OpeningScene.unity
     guid: 51084903d9650d7428dcb554866ca96b
   - enabled: 1
-    path: Assets/ANDO/Scenes/SlimeTestScene.unity
-    guid: 4b5e80f02f05ea145b39356547da7ee7
+    path: Assets/ANDO/Scenes/GameScene.unity
+    guid: eb1f4040550f4584f8637aa7fe1bd71b
   m_configObjects: {}

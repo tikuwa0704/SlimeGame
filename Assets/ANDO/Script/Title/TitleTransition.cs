@@ -21,7 +21,10 @@ public class TitleTransition : MonoBehaviour
 
     public void ClickOnNewGame()
     {
-        SceneManager.LoadScene("SlimeTestScene");
+
+		Debug.Log("aaa");
+		ServiceLocator<ISoundService>.Instance.Stop("test");
+		SceneManager.LoadScene("GameScene");
     }
 
 
@@ -47,15 +50,16 @@ public class TitleTransition : MonoBehaviour
 	{
 		//　ロード画面UIをアクティブにする
 		loadUI.SetActive(true);
-
+		ServiceLocator<ISoundService>.Instance.Stop();
 		//　コルーチンを開始
 		StartCoroutine("LoadData");
 	}
 
 	IEnumerator LoadData()
 	{
+		
 		// シーンの読み込みをする
-		async = SceneManager.LoadSceneAsync("SlimeTestScene");
+		async = SceneManager.LoadSceneAsync("GameScene");
 
 		//　読み込みが終わるまで進捗状況をスライダーの値に反映させる
 		while (!async.isDone)
