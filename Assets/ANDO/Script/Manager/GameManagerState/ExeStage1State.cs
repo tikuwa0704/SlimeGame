@@ -10,28 +10,22 @@ public class ExeState1State : State<GameManager>
 
     public ExeState1State(GameManager owner) : base(owner) { }
 
-    private GameObject Player;
-
-    private GameObject count_text;
+    GameObject text;
 
     public override void Enter()
     {
-       
-       //ステージのタイムラインをONに
-
-       //プレイヤーを動けなくする
-       Player = GameObject.Find("PlayerSlime");
-
-
-        count_text = GameObject.Find("StageStartText");
-        count_text.GetComponent<CountDownNumber>().enabled = true;
+        //count_text = GameObject.Find("StageStartText");
+       text = ServiceLocator<IUIService>.Instance.GetUIObject("ステージスタート");
+        ServiceLocator<IUIService>.Instance.SetUIActive("ステージスタート",true);
+        //count_text.GetComponent<CountDownNumber>().enabled = true;
         ServiceLocator<ISoundService>.Instance.Play("カウントダウン");
     }
 
     public override void Execute()
     {
-
-        if(count_text.GetComponent<CountDownNumber>().time <= -1)
+        ;
+        float t = text.GetComponent<CountDownNumber>().time;
+        if(t <= -1)
         {
             owner.ChangeState(E_GAME_MANAGER_STATE.FinSTAGE1);
         }
@@ -41,9 +35,9 @@ public class ExeState1State : State<GameManager>
 
     public override void Exit()
     {
-        count_text.GetComponent<CountDownNumber>().enabled = false;
+        text.GetComponent<CountDownNumber>().enabled = false;
 
-        count_text.GetComponent<Text>().enabled = false;
+        text.GetComponent<Text>().enabled = false;
 
         SlimeCoreController.isActive = true;
     }

@@ -12,6 +12,8 @@ public class FinState1State : State<GameManager>
     public override void Enter()
     {
         ServiceLocator<ISoundService>.Instance.Play("test2", true);
+
+        ServiceLocator<IUIService>.Instance.SetUIActive("チュートリアル", true);
         
     }
 

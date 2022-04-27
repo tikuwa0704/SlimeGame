@@ -15,6 +15,12 @@ public class BeginState1State : State<GameManager>
 
     public override void Enter()
     {
+        
+        ServiceLocator<IUIService>.Instance.SetUIActive("オープニング", false);
+        ServiceLocator<IUIService>.Instance.SetUIActive("タイトル", false);
+        ServiceLocator<IUIService>.Instance.SetUIActive("バックグラウンド", false);
+
+
         TimeLine = GameObject.Find("StageBeginTimeLine").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
         TimeLine.enabled = true;

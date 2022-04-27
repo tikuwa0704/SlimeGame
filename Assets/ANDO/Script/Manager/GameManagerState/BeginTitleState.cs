@@ -10,8 +10,7 @@ public class BeginTitleState : State<GameManager>
 
     public override void Enter()
     {
-        //ServiceLocator<ISoundService>.Instance.Play("test", true);
-
+        
     }
 
     public override void Execute()
@@ -21,7 +20,7 @@ public class BeginTitleState : State<GameManager>
 
     public override void Exit()
     {
-        //ServiceLocator<ISoundService>.Instance.Stop();
+        
         base.Exit();
     }
 }

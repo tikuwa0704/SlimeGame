@@ -22,10 +22,14 @@ public enum E_GAME_MANAGER_STATE
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>, IGameService
 {
+    [SerializeField] public GameObject canvas;
+
 
     private void Awake()
     {
         DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
+
+        canvas = GameObject.Find("Canvas");
 
         //ステートを登録する
         stateList.Add(new BeginTitleState(this));

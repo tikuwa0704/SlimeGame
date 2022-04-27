@@ -9,9 +9,8 @@ public class CountDownNumber : MonoBehaviour
     [SerializeField] Text countDownNumber;
 
     [SerializeField] public float time;
-   
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         countDownNumber = this.GetComponent<Text>();
     }

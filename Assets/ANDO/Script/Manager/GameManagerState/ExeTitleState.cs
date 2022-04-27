@@ -12,7 +12,6 @@ public class ExeTitleState : State<GameManager>
     {
         ServiceLocator<ISoundService>.Instance.Play("test", true);
         base.Enter();
-       
     }
 
     public override void Execute()
