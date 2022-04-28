@@ -40,7 +40,7 @@ public class BeginState1State : State<GameManager>
         if (TimeLine.time >= 10)
         {
 
-            owner.ChangeState(E_GAME_MANAGER_STATE.ExeSTAGE1);
+            owner.ChangeState(E_GAME_MANAGER_STATE.READY_STAGE1);
 
         }
 

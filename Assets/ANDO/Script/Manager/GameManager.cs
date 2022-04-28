@@ -8,16 +8,17 @@ using StateMachineAI;
 public interface IGameService
 {
     void TransState(E_GAME_MANAGER_STATE state);
+
+    bool IsState(E_GAME_MANAGER_STATE state);
 }
 
 public enum E_GAME_MANAGER_STATE
 {
-    BeginTITLE,
-    ExeTITLE,
-    FinTITLE,
-    BeginSTAGE1,
-    ExeSTAGE1,
-    FinSTAGE1,
+    READY_TITLE,//タイトルから他のマネージャーが登録されるまで
+    EXE_TITLE,//音を鳴らす
+    BEGIN_STAGE1,
+    READY_STAGE1,
+    EXE_STAGE1,
 }
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>, IGameService
@@ -32,16 +33,15 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         canvas = GameObject.Find("Canvas");
 
         //ステートを登録する
-        stateList.Add(new BeginTitleState(this));
+        stateList.Add(new ReadyTitleState(this));
         stateList.Add(new ExeTitleState(this));
-        stateList.Add(new FinTitleState(this));
         stateList.Add(new BeginState1State(this));
-        stateList.Add(new ExeState1State(this));
-        stateList.Add(new FinState1State(this));
+        stateList.Add(new ReadyStage1State(this));
+        stateList.Add(new ExeStage1State(this));
 
         stateMachine = new StateMachine<GameManager>();
 
-        ChangeState(E_GAME_MANAGER_STATE.BeginTITLE);
+        ChangeState(E_GAME_MANAGER_STATE.READY_TITLE);
 
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -63,7 +63,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         if (scene.name=="GameScene")
         {
 
-            ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.BeginSTAGE1);
+            ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
         }
     }
 
@@ -71,5 +71,11 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
     {
         Debug.Log(scene.name + " scene unloaded");
     }
+
+    public bool IsState(E_GAME_MANAGER_STATE state)
+    {
+        return IsCurrentState(state);
+    }
+
 }
 

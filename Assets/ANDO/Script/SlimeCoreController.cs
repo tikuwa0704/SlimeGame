@@ -60,8 +60,13 @@ public class SlimeCoreController : MonoBehaviour
     {
         var velo = Horizontalrotation * new Vector3(inputHorizontal, 0, inputVertical).normalized;
        
-        rb.AddForce(velo * moveSpeed,ForceMode.Force);
-       
+        if (rb.velocity.magnitude < 5)
+        {
+            rb.AddForce(velo * moveSpeed,ForceMode.Force);
+        }
+
+        
+
         // キャラクターの向きを進行方向に
         if (velo != Vector3.zero)
         {
