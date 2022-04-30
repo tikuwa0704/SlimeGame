@@ -19,6 +19,8 @@ public enum E_GAME_MANAGER_STATE
     BEGIN_STAGE1,
     READY_STAGE1,
     EXE_STAGE1,
+    FIN_STAGE1,
+    READY_STAGE2,
 }
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>, IGameService
@@ -38,6 +40,8 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         stateList.Add(new BeginState1State(this));
         stateList.Add(new ReadyStage1State(this));
         stateList.Add(new ExeStage1State(this));
+        stateList.Add(new FinStage1State(this));
+        stateList.Add(new ReadyStage2State(this));
 
         stateMachine = new StateMachine<GameManager>();
 
@@ -74,6 +78,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
 
     public bool IsState(E_GAME_MANAGER_STATE state)
     {
+        Debug.Log("‚±‚±‚Ü‚Å");
         return IsCurrentState(state);
     }
 
