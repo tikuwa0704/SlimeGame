@@ -67,7 +67,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         Debug.Log(scene.name + " scene loaded");
         if (scene.name=="GameScene")
         {
-            ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
+            //ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
         }
     }
 
