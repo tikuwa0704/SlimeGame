@@ -21,9 +21,12 @@ public class StageFinScript : MonoBehaviour
     {
         
 
-        if (other.gameObject.CompareTag("Player")&&ServiceLocator<IGameService>.Instance.IsState(E_GAME_MANAGER_STATE.EXE_STAGE1))
+        if (other.gameObject.CompareTag("Player"))
         {
-            ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.EXE_STAGE1);
+            if (ServiceLocator<IGameService>.Instance.IsState(E_GAME_MANAGER_STATE.EXE_STAGE1))
+            {
+                ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.FIN_STAGE1);
+            }
 
 
         }
