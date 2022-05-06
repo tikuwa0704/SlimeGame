@@ -20,7 +20,7 @@ public class SlimeRender : MonoBehaviour
         material.SetInt("_SphereCount", _colliders.Length);
 
         // ƒ‰ƒ“ƒ_ƒ€‚ÈF‚ğ”z—ñ‚ÉŠi”[
-               for (var i = 0; i < _colors.Length; i++)
+               for (var i = 0; i < MaxSphereCount; i++)
                    {
             _colors[i] = (Vector4)Random.ColorHSV(0, 1, 1, 1, 1, 1);
                    }
