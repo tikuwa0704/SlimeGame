@@ -4,6 +4,90 @@ using UnityEngine;
 
 public class Suuzi : MonoBehaviour
 {
+    //スプライト表示用オブジェクト(プレハブ)
+    [SerializeField] private GameObject Slime_Kazu;
+
+    //数字スプライト
+    //0
+    [SerializeField] private Sprite _0;
+    //1
+    [SerializeField] private Sprite _1;
+    //2
+    [SerializeField] private Sprite _2;
+    //3
+    [SerializeField] private Sprite _3;
+    //4
+    [SerializeField] private Sprite _4;
+    //5
+    [SerializeField] private Sprite _5;
+    //6
+    [SerializeField] private Sprite _6;
+    //7
+    [SerializeField] private Sprite _7;
+    //8
+    [SerializeField] private Sprite _8;
+    //9
+    [SerializeField] private Sprite _9;
+
+    //数字の表示間隔
+    [SerializeField] float width;
+
+    //表示する値
+    private int Hyouzi_Kazu;
+
+    //表示用スプライトオブジェクトの配列
+    private GameObject[] NumSprite;
+
+    //スプライトディクショナリ
+    private Dictionary<char, Sprite> Sprite_Dictionary;
+
+    //スプライトディクショナリを初期化
+    void Awake()
+    {
+        Sprite_Dictionary = new Dictionary<char, Sprite>()
+        {
+            { '0', _0 },
+            { '1', _1 },
+            { '2', _2 },
+            { '3', _3 },
+            { '4', _4 },
+            { '5', _5 },
+            { '6', _6 },
+            { '7', _7 },
+            { '8', _8 },
+            { '9', _9 },
+         };
+     }
+
+    //表示する値
+    public int Hyouzi
+    {
+        get
+        {
+            return Hyouzi_Kazu;
+        }
+
+        set 
+        {
+            Hyouzi_Kazu = value;
+
+            //表示文字列の取得
+            string strHyouzi = value.ToString();
+
+            //現在表示中のオブジェクトを削除
+            if (NumSprite != null)
+            {
+                foreach (var numsprite in NumSprite)
+            }
+        }
+
+
+    }
+
+
+
+
+    /*
     //使用する画像の枚数
     [SerializeField] private Sprite[] Kazu = new Sprite[10];
 
@@ -58,4 +142,5 @@ public class Suuzi : MonoBehaviour
         n.Reverse();
 
     }
+    */
 }
