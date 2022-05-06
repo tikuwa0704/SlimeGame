@@ -27,6 +27,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
 {
     [SerializeField] public GameObject canvas;
 
+    [SerializeField] public E_GAME_MANAGER_STATE dispaly_state;
 
     private void Awake()
     {
@@ -63,11 +64,10 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log(scene.name + " scene loaded");
+        Debug.Log(scene.name + " scene loaded");
         if (scene.name=="GameScene")
         {
-
-            ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
+            //ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
         }
     }
 
