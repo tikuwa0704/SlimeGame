@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Suuzi : MonoBehaviour
 {
+    /*
     //スプライト表示用オブジェクト(プレハブ)
     [SerializeField] private GameObject Slime_Kazu;
 
@@ -78,6 +79,18 @@ public class Suuzi : MonoBehaviour
             if (NumSprite != null)
             {
                 foreach (var numsprite in NumSprite)
+                {
+                    GameObject.Destroy(numsprite);
+                }
+            }
+
+            //表示する桁数分だけオブジェクト作成
+            NumSprite = new GameObject[strHyouzi.Length];
+
+            for (var i = 0; i < NumSprite.Length; ++i)
+            {
+                //オブジェクト作成
+                NumSprite[i] = Instantiate
             }
         }
 
