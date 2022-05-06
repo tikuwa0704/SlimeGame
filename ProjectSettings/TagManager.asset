@@ -9,6 +9,7 @@ TagManager:
   - Destroy
   - Zikken
   - Syougaibutu
+  - SC
   layers:
   - Default
   - TransparentFX
