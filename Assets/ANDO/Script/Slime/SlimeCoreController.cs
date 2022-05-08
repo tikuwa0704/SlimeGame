@@ -149,7 +149,7 @@ public class SlimeCoreController : MonoBehaviour
             this.GetComponent<SphereCollider>().material = _physicMaterial[1];
 
             //子スライムの数の割合で氷になった時の大きさが変わる
-            int slime_num = this.GetComponent<SlimeConcentration>().m_sticking_slime_num;
+            int slime_num = this.GetComponent<SlimeConcentration>().m_stick_num;
 
             //最大値
             float scale_max = 3.0f;

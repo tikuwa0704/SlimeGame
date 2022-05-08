@@ -22,7 +22,7 @@ public class SlimeNumCount : MonoBehaviour
 
         if (controller == null) return;
 
-        int SlimeNum = controller.m_sticking_slime_num;
+        int SlimeNum = controller.m_stick_num;
         int MaxSlimeNum = 100;
 
 

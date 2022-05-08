@@ -19,13 +19,15 @@ public class CreateRangeRandomPosition : MonoBehaviour
     [SerializeField]
     [Tooltip("生成する時間")]
     private float countTime;
-
+    [SerializeField]
+   
     // 経過時間
     private float time;
 
     // Update is called once per frame
     void Update()
     {
+        if (StickSlime.m_stick_num >= 100) return;
         // 前フレームからの時間を加算していく
         time = time + Time.deltaTime;
 
