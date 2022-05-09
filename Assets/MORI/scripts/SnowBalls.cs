@@ -13,7 +13,7 @@ public class SnowBalls : MonoBehaviour
     {
         //-=で徐々にスケールを小さくする
         transform.localScale += speed * Time.deltaTime;
-        Invoke("Des", 3);
+        Invoke("Des", 5);
     }
 
     public void Des()
