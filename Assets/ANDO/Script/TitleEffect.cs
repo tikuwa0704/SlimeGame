@@ -11,6 +11,7 @@ public class TitleEffect : MonoBehaviour
         E_STICK,　　 //スライムくっつく
         E_LEAVE_BEGIN,//離れる開始
         E_LEAVE,     //離れる
+        E_LEAVE_END, //離れる終わり
     }
 
     [SerializeField]
@@ -19,9 +20,6 @@ public class TitleEffect : MonoBehaviour
     [SerializeField]
     [Tooltip("スライムの数")]
     int m_slimeChildrenNum;
-    [SerializeField]
-    [Tooltip("引き寄せる中心")]
-    GameObject m_slimeCore;
     [SerializeField]
     [Tooltip("地面")]
     GameObject m_ground;
@@ -52,6 +50,9 @@ public class TitleEffect : MonoBehaviour
                 break;
             case E_TITLE_STATE.E_LEAVE:
                 LeaveState();
+                break;
+            case E_TITLE_STATE.E_LEAVE_END:
+                LeaveEndState();
                 break;
         }
 
@@ -99,8 +100,7 @@ public class TitleEffect : MonoBehaviour
     void LeaveBeginState()
     {
         StickSlime.m_is_stick = false;
-        m_ground.GetComponent<BoxCollider>().isTrigger = true;
-        m_cnt = 2.0f;
+        m_cnt = 5.0f;
         m_state = E_TITLE_STATE.E_LEAVE;
 
     }
@@ -111,7 +111,22 @@ public class TitleEffect : MonoBehaviour
 
         if (m_cnt <= 0)
         {
-            m_ground.GetComponent<BoxCollider>().isTrigger = false;
+            m_cnt = 3.0f;
+            m_ground.GetComponent<MeshCollider>().enabled = false;
+            m_state = E_TITLE_STATE.E_LEAVE_END;
+
+        }
+    }
+    
+    void LeaveEndState()
+    {
+       
+       
+        m_cnt -= Time.deltaTime;
+
+        if (m_cnt <= 0)
+        { 
+            m_ground.GetComponent<MeshCollider>().enabled = true;
             m_state = E_TITLE_STATE.E_GENERATION;
 
         }

@@ -12,7 +12,7 @@ public class ButtonController : MonoBehaviour
 
     void OnClick()
     {
-        transform.DOScale(1.1f, 0.5f).SetEase(Ease.OutElastic);
+        transform.DOScale(1.1f, 0.5f).SetEase(Ease.OutElastic).SetLoops(1,LoopType.Yoyo);
        
     }
 }

@@ -18,9 +18,8 @@ public class TitleMove : MonoBehaviour
 
         
         seq.Append(
-        rectTransform.DOScale(new Vector3(0.9f, 0.9f), 1.0f).SetLoops(-1, LoopType.Restart)
+        rectTransform.DOScale(0.1f, 1.0f).SetRelative().SetLoops(-1, LoopType.Restart)
         );
-        
 
 
         seq.Join(
