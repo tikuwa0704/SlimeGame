@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Sensor2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool On = false;
+    public GameObject Yukineko;
+    public GameObject Yukineko2;
+    public GameObject Yukineko3;
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            
+            if (On == false)
+            {
+                Yukineko.GetComponent<Snowball>().Exciting2();
+                Yukineko2.GetComponent<Snowball>().Exciting();
+                Yukineko3.GetComponent<Snowball>().Exciting2();
+                Debug.Log("•@–Ñ");
+                On = true;
+            }
+           
         }
     }
 }
