@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Suuzi : MonoBehaviour
 {
-    /*
+    
     //スプライト表示用オブジェクト(プレハブ)
-    [SerializeField] private GameObject Slime_Kazu;
+    [SerializeField] private GameObject NumberPrefab;
+    [SerializeField] private GameObject Slime_Core;
 
     //数字スプライト
     //0
@@ -74,7 +76,8 @@ public class Suuzi : MonoBehaviour
 
             //表示文字列の取得
             string strHyouzi = value.ToString();
-
+            //Debug.Log("aaabbb" + Hyouzi_Kazu);
+            //Debug.Log("bbb" + strHyouzi);
             //現在表示中のオブジェクトを削除
             if (NumSprite != null)
             {
@@ -86,18 +89,41 @@ public class Suuzi : MonoBehaviour
 
             //表示する桁数分だけオブジェクト作成
             NumSprite = new GameObject[strHyouzi.Length];
-
+            //Debug.Log("aaa"+strHyouzi.Length);
             for (var i = 0; i < NumSprite.Length; ++i)
             {
+                
                 //オブジェクト作成
-                NumSprite[i] = Instantiate
+                NumSprite[i] = Instantiate(NumberPrefab, transform.position + new Vector3((float)i * width, 0), Quaternion.identity) as GameObject;
+
+                //表示する数値の指定
+                NumSprite[i].GetComponent<Image>().sprite = Sprite_Dictionary[strHyouzi[i]];
+
+                //自信の子階層に移動
+                NumSprite[i].transform.parent = transform;
             }
         }
 
 
     }
 
+    private void Start()
+    {
 
+        var suuzi = GetComponent<Suuzi>();
+        suuzi.Hyouzi = 100;
+
+    }
+
+    private void Update()
+    {
+        if (Slime_Core)
+        {
+            var slime_Cone = Slime_Core.GetComponent<SlimeConcentration>();
+            var suuzi = GetComponent<Suuzi>();
+            suuzi.Hyouzi = slime_Cone.m_sticking_slime_num;
+        }
+    }
 
 
     /*
