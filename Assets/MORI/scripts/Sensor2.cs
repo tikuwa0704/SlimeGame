@@ -19,9 +19,7 @@ public class Sensor2 : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
-            Panel.SetActive(true);
-            Invoke("SceneGo", 3);
+            
         }
     }
 }
