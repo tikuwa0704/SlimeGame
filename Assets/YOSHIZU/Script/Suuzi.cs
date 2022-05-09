@@ -121,7 +121,7 @@ public class Suuzi : MonoBehaviour
         {
             var slime_Cone = Slime_Core.GetComponent<SlimeConcentration>();
             var suuzi = GetComponent<Suuzi>();
-            suuzi.Hyouzi = slime_Cone.m_sticking_slime_num;
+            suuzi.Hyouzi = slime_Cone.m_stick_num;
         }
     }
 
