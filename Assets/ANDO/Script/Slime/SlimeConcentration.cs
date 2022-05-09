@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class SlimeConcentration : MonoBehaviour
 {
-	[Header("子スライム群の親オブジェクト")]
-	[SerializeField] public GameObject m_slime;
-
-	[Header("子スライムをスライムコアに引っ張る力の大きさ")]
-	[SerializeField] public float ConcentrationPower;
-
-	[Header("引っ張られている子スライムの数")]
-	[SerializeField] public int m_sticking_slime_num;
-
-	[Header("子スライムを引っ張るスライムコアの範囲")]
-	[SerializeField] public float m_together_rad;
+	
+	[SerializeField]
+	[Tooltip("子スライム群の親オブジェクト")]
+	private GameObject m_slime_children;
+	[SerializeField]
+	[Tooltip("子スライムをスライムコアに引っ張る力の大きさ")]
+	public float m_stick_power;
+	[Tooltip("引っ張られている子スライムの数")]
+	public int m_stick_num;
+	[SerializeField] 
+	[Tooltip("子スライムを引っ張るスライムコアの範囲")]
+	private float m_stick_rad;
 
 	// Start is called before the first frame update
 	void Start()
     {
-		m_sticking_slime_num = 100;
+		m_stick_num = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
-		
-		SlimeTogetherLeave(m_slime);
+		SlimeTogetherLeave(m_slime_children);
     }
 
 	void SlimeTogetherLeave(GameObject obj)
@@ -49,12 +49,12 @@ public class SlimeConcentration : MonoBehaviour
 			Vector3 dir = this.transform.position - ob.position;
 			SlimeContoroller slime_con = ob.gameObject.GetComponent<SlimeContoroller>();
 				
-			if (dir.magnitude <= m_together_rad)
+			if (dir.magnitude <= m_stick_rad)
 			{
 				slime_con.m_is_sticking = true;
 
 				Rigidbody rb = ob.gameObject.GetComponent<Rigidbody>();
-				rb.AddForce(dir.normalized * ConcentrationPower * Time.deltaTime);
+				rb.AddForce(dir.normalized * m_stick_power * Time.deltaTime);
 
 				_near_slime_num++;
             }
@@ -65,6 +65,7 @@ public class SlimeConcentration : MonoBehaviour
 
 		}
 
-		m_sticking_slime_num = _near_slime_num;
+		m_stick_num = _near_slime_num;
 	}
+	
 }

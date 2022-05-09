@@ -16,18 +16,18 @@ public class TitleMove : MonoBehaviour
         //rectTransform.DOMove(new Vector3(0f, 0f, 0f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutBounce);
         Sequence seq = DOTween.Sequence();
 
-        /*
+        
         seq.Append(
-        rectTransform.DOScale(new Vector3(1.1f, 1.1f), 1.0f).SetLoops(-1, LoopType.Restart)
+        rectTransform.DOScale(new Vector3(0.9f, 0.9f), 1.0f).SetLoops(-1, LoopType.Restart)
         );
-        */
+        
 
 
         seq.Join(
         rectTransform.DOLocalJump(
-            new Vector3(250f, 0f, 0f),      // 移動終了地点
+            new Vector3(0f, 0f, 0f),      // 移動終了地点
             30,               // ジャンプする力
-            5,               // ジャンプする回数
+            1,               // ジャンプする回数
             3.0f              // アニメーション時間
             ).SetRelative().SetLoops(-1, LoopType.Yoyo)
             );
@@ -37,9 +37,4 @@ public class TitleMove : MonoBehaviour
         //this.transform.DOMove(new Vector3(100f, 0f, 0f), 3f).SetRelative().SetLoops(-1, LoopType.Yoyo);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
