@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Opning : MonoBehaviour
 {
     
-    GameObject botton;
-
+    [SerializeField] GameObject botton;
+   
     Image m_img;
 
     float t;
@@ -15,8 +15,7 @@ public class Opning : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        botton = GameObject.Find("CLICK ON THE SCREEN");
-
+        
         m_img = GetComponent<Image>();
 
         t = 1.0f;

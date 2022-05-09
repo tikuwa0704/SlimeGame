@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3680388842094738125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -4.5}
+  m_LocalPosition: {x: 0, y: 4.9986496, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3680388842770738071}
@@ -6797,10 +6797,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a551b060bb58e7f42be48bdebe47cebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_slime: {fileID: 3680388844006589430}
-  ConcentrationPower: 2000
-  m_sticking_slime_num: 0
-  m_together_rad: 7
+  m_slime_children: {fileID: 3680388844006589430}
+  m_stick_power: 2500
+  m_stick_num: 0
+  m_stick_rad: 10
 --- !u!82 &2075844778650396398
 AudioSource:
   m_ObjectHideFlags: 0

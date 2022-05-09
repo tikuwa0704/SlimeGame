@@ -19,6 +19,7 @@ public class BeginState1State : State<GameManager>
         ServiceLocator<IUIService>.Instance.SetUIActive("オープニング", false);
         ServiceLocator<IUIService>.Instance.SetUIActive("タイトル", false);
         ServiceLocator<IUIService>.Instance.SetUIActive("バックグラウンド", false);
+        ServiceLocator<IUIService>.Instance.SetUIActive("タイトルメニューエリア", false);
 
         // カーソル非表示
         Cursor.visible = false;
