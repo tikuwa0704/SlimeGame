@@ -11,16 +11,8 @@ public class BeginState1State : State<GameManager>
 
     private PlayableDirector TimeLine;
 
-    private GameObject Player;
-
     public override void Enter()
     {
-        
-        ServiceLocator<IUIService>.Instance.SetUIActive("オープニング", false);
-        ServiceLocator<IUIService>.Instance.SetUIActive("タイトル", false);
-        ServiceLocator<IUIService>.Instance.SetUIActive("バックグラウンド", false);
-        ServiceLocator<IUIService>.Instance.SetUIActive("タイトルメニューエリア", false);
-
         // カーソル非表示
         Cursor.visible = false;
         // カーソルを画面中央にロックする
@@ -29,15 +21,15 @@ public class BeginState1State : State<GameManager>
 
         TimeLine = GameObject.Find("StageBeginTimeLine").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
-        TimeLine.enabled = true;
+        TimeLine.Play();
         //ムービーを始める
 
         //プレイヤーを動けなくする
-        Player = GameObject.Find("PlayerSlime");
         SlimeCoreController.isActive = false;
-        Player.GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>().enabled = false;
 
-        
+        owner.m_mainCamera.SetActive(false);
+        owner.m_subCamera.SetActive(true);
+
     }
 
     public override void Execute()
@@ -55,11 +47,10 @@ public class BeginState1State : State<GameManager>
     }
 
     public override void Exit()
-    {  
-        TimeLine.enabled = false;
+    {
+        TimeLine.Pause();
         //カメラの移動はできるようにする
-        Cinemachine.CinemachineVirtualCamera cinema = Player.GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>();
-        cinema.enabled = true;
-        //カウントダウンが始まる
+        owner.m_mainCamera.SetActive(true);
+        owner.m_subCamera.SetActive(false);
     }
 }

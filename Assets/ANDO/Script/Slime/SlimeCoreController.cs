@@ -10,6 +10,10 @@ public class SlimeCoreController : MonoBehaviour
     [Header("子スライム群")]
     [SerializeField] public GameObject m_slime;
 
+    [SerializeField]
+    [Header("メインカメラ")]
+    Camera m_mainCamera;
+
     float inputHorizontal;
     float inputVertical;
     Quaternion Horizontalrotation;
@@ -40,7 +44,7 @@ public class SlimeCoreController : MonoBehaviour
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
-        Horizontalrotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up);
+        Horizontalrotation = Quaternion.AngleAxis(m_mainCamera.transform.eulerAngles.y, Vector3.up);
         if (isActive)
         {
             Jump();
