@@ -14,39 +14,42 @@ public interface IGameService
 
 public enum E_GAME_MANAGER_STATE
 {
-    READY_TITLE,//タイトルから他のマネージャーが登録されるまで
-    EXE_TITLE,//音を鳴らす
-    BEGIN_STAGE1,
-    READY_STAGE1,
-    EXE_STAGE1,
-    FIN_STAGE1,
-    READY_STAGE2,
+    NONE,//何もしない
+    BEGIN_STAGE1,//ステージ1の開始
+    READY_STAGE1,//ステージ1のファンファーレ
+    EXE_STAGE1,//ステージ1挑戦中
+    FIN_STAGE1,//ステージ1の終了
+    BEGIN_STAGE2,
+    READY_STAGE2,//ステージ2のファンファーレ
+    EXE_STAGE2,//ステージ2挑戦中
+    FIN_STAGE2,//ステージ2の終了
 }
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>, IGameService
 {
-    [SerializeField] public GameObject canvas;
-
+  
     [SerializeField] public E_GAME_MANAGER_STATE dispaly_state;
+
+    [SerializeField] public GameObject m_mainCamera;
+    [SerializeField] public GameObject m_subCamera;
+
+
 
     private void Awake()
     {
-        DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
-
-        canvas = GameObject.Find("Canvas");
+        //DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
 
         //ステートを登録する
-        stateList.Add(new ReadyTitleState(this));
-        stateList.Add(new ExeTitleState(this));
+        stateList.Add(new NoneState(this));
         stateList.Add(new BeginState1State(this));
         stateList.Add(new ReadyStage1State(this));
         stateList.Add(new ExeStage1State(this));
         stateList.Add(new FinStage1State(this));
-        stateList.Add(new ReadyStage2State(this));
+        stateList.Add(new BeginStage2State(this));
 
         stateMachine = new StateMachine<GameManager>();
 
-        ChangeState(E_GAME_MANAGER_STATE.READY_TITLE);
+        ChangeState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
 
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -64,11 +67,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log(scene.name + " scene loaded");
-        if (scene.name=="GameScene")
-        {
-            //ServiceLocator<IGameService>.Instance.TransState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
-        }
+        Debug.Log(scene.name + " scene loaded");       
     }
 
     void OnSceneUnloaded(Scene scene)
