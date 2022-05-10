@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ServiceInstaller : MonoBehaviour
 {
-    [SerializeField]
-    private GameManager gameManager;
 
     [SerializeField]
     private SoundManager soundManager;
@@ -17,9 +15,8 @@ public class ServiceInstaller : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
+        //DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
 
-        ServiceLocator<IGameService>.Bind(gameManager); //サービスの登録
         ServiceLocator<ISoundService>.Bind(soundManager); //サービスの登録
         ServiceLocator<IUIService>.Bind(UIManager); //サービスの登録
     }

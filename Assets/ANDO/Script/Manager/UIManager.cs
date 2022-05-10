@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour,IUIService
 
     private void Awake()
     {
-        DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
+        //DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
 
         //soundDictionary‚ÉƒZƒbƒg
         foreach (var UIData in UIDatas)

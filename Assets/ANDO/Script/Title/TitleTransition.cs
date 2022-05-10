@@ -19,15 +19,6 @@ public class TitleTransition : MonoBehaviour
         menu.SetActive(true);
     }
 
-    public void ClickOnNewGame()
-    {
-
-		Debug.Log("aaa");
-		ServiceLocator<ISoundService>.Instance.Stop("test");
-		SceneManager.LoadScene("GameScene");
-    }
-
-
 	public void ClickExit()
     {
 #if UNITY_EDITOR
@@ -57,7 +48,7 @@ public class TitleTransition : MonoBehaviour
 
 	IEnumerator LoadData()
 	{
-		
+		Debug.Log("’Ê‚Á‚Ä‚Ü‚·");
 		// ƒV[ƒ“‚Ì“Ç‚İ‚İ‚ğ‚·‚é
 		async = SceneManager.LoadSceneAsync("GameScene");
 
