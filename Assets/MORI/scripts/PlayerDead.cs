@@ -14,6 +14,10 @@ public class PlayerDead : MonoBehaviour
             Panel.SetActive(true);
             Invoke("SceneGo", 3);
         }
+        if (collision.gameObject.tag == "Syougaibutu")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     public void SceneGo()

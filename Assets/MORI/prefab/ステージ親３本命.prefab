@@ -42295,7 +42295,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -42312,7 +42312,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -42414,7 +42414,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -42465,7 +42465,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -42567,7 +42567,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -43009,7 +43009,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -43145,7 +43145,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -43723,7 +43723,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -44318,7 +44318,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -46885,7 +46885,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -46919,7 +46919,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -46970,7 +46970,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -47004,7 +47004,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -47089,7 +47089,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -47106,7 +47106,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 6
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -58240,17 +58240,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 0}
   m_IsSelectable: 1
-  m_SelectedFaces: b3010000
-  m_SelectedEdges:
-  - a: 1740
-    b: 1741
-  - a: 1742
-    b: 1740
-  - a: 1741
-    b: 1743
-  - a: 1743
-    b: 1742
-  m_SelectedVertices: cc060000cd060000ce060000cf060000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!23 &5608137695498853881
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58276,6 +58268,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 3abf473d50106f44c9611c2c76fd9a91, type: 2}
   - {fileID: 2100000, guid: 5d8af8f434f69794eabd684fb44b4fbf, type: 2}
   - {fileID: 2100000, guid: 87dd53efea3c3294fba012f4d0953da6, type: 2}
+  - {fileID: 2100000, guid: c7d0747bd7053804da8250ca0ea203d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
