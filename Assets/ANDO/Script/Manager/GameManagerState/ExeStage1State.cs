@@ -18,7 +18,7 @@ public class ExeStage1State : State<GameManager>
 
         ServiceLocator<IUIService>.Instance.SetUIActive("チュートリアルテキストエリア", true);
 
-        fin_stage_collide = GameObject.Find("StageFinCollide").GetComponent<CollideJudger>();
+        fin_stage_collide = GameObject.Find("Stage1FinCollide").GetComponent<CollideJudger>();
     }
 
     public override void Execute()
