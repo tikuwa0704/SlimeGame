@@ -7,6 +7,10 @@ public class DoukutuLand : MonoBehaviour
     public float up = 0.01f;
     public bool col = false;
 
+   /* public void Update()
+    {
+        
+    }*/
     public void FixedUpdate()
     {
         if (col == true)
