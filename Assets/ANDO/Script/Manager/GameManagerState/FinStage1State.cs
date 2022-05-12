@@ -10,8 +10,6 @@ public class FinStage1State : State<GameManager>
 
     public FinStage1State(GameManager owner) : base(owner) { }
 
-    float t;
-
     PlayableDirector m_time_line;
 
     public override void Enter()
@@ -21,8 +19,6 @@ public class FinStage1State : State<GameManager>
         ServiceLocator<ISoundService>.Instance.Play("SE_歓声と拍手");
 
         SlimeCoreController.isActive = false;//プレイヤーを動けなくする
-
-        t = 5.0f;
 
         m_time_line = GameObject.Find("WallUpEvent").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
@@ -35,11 +31,10 @@ public class FinStage1State : State<GameManager>
 
     public override void Execute()
     {
-        //t -= Time.deltaTime;
-
+        
         if (m_time_line.time >= 10)
         {
-            owner.ChangeState(E_GAME_MANAGER_STATE.BEGIN_STAGE2);
+            owner.ChangeState(E_GAME_MANAGER_STATE.CONECT_1TO2);
             SlimeCoreController.isActive = true;
         }
     }
