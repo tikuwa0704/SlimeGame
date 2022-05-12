@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Wind : MonoBehaviour
 {
+    /*
     //X軸方向の加える風の力
     public float WindX = 0f;
 
@@ -12,7 +13,8 @@ public class Wind : MonoBehaviour
 
     //Z軸方向の加える風の力
     public float WindZ = 0f;
-
+    */
+    public float pawer = 0f;
     /// <summary>
     /// トリガーの範囲に入っている間ずっと実行される
     /// </summary>
@@ -23,12 +25,11 @@ public class Wind : MonoBehaviour
         {
             // 当たった相手のrigidbodyコンポーネントを取得
             Rigidbody OtherRigidbody = Other.GetComponent<Rigidbody>();
-
             // rigidbodyがnullではない場合（相手のGameObjectにrigidbodyが付いている場合）
             if (OtherRigidbody != null)
             {
                 // 相手のrigidbodyに力を加える
-                OtherRigidbody.AddForce(WindX, WindY, WindZ, ForceMode.Force);
+                OtherRigidbody.AddForce(this.transform.right * pawer, ForceMode.Force);
             }
         }
       
