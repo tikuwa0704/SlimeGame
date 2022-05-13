@@ -100,7 +100,7 @@ public class Suuzi : MonoBehaviour
                 NumSprite[i].GetComponent<Image>().sprite = Sprite_Dictionary[strHyouzi[i]];
 
                 //©M‚ÌqŠK‘w‚ÉˆÚ“®
-                NumSprite[i].transform.parent = transform;
+                NumSprite[i].transform.parent = this.transform;
             }
         }
 

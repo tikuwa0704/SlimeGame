@@ -10,5 +10,9 @@ public class Des : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (collision.gameObject.tag == "SC")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
