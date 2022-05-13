@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class SlimeCoreController : MonoBehaviour
 {
-    [Header("スライムが動くかどうか")]
+    [Tooltip("スライムが動くかどうか")]
     public static bool isActive = true;
 
-    [Header("子スライム群")]
-    [SerializeField] public GameObject m_slime;
+    [Tooltip("スライムが動くかどうかRd")]
+    public static Rigidbody rb;
+    
+    [SerializeField]
+    [Tooltip("子スライム群")]
+     public GameObject m_slime;
 
     [SerializeField]
-    [Header("メインカメラ")]
+    [Tooltip("メインカメラ")]
     Camera m_mainCamera;
+
+    [SerializeField]
+    [Tooltip("最高速度")]
+    float m_max_magnitude;
 
     float inputHorizontal;
     float inputVertical;
     Quaternion Horizontalrotation;
-    Rigidbody rb;
+    
 
     public enum SLIME_CORE_STATE
     {
@@ -25,13 +33,15 @@ public class SlimeCoreController : MonoBehaviour
         COLD,
     }
 
-    [Header("スライムの状態")]
-    [SerializeField] public SLIME_CORE_STATE m_state;
+    [SerializeField]
+    [Tooltip("スライムの状態")]
+     public SLIME_CORE_STATE m_state;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        TryGetComponent(out rb);
+        
         target_scale = this.transform.localScale;
         t = 1.0f;
         total_vel = 0;
@@ -42,76 +52,96 @@ public class SlimeCoreController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputHorizontal = Input.GetAxisRaw("Horizontal");
-        inputVertical = Input.GetAxisRaw("Vertical");
-        Horizontalrotation = Quaternion.AngleAxis(m_mainCamera.transform.eulerAngles.y, Vector3.up);
         if (isActive)
         {
             Jump();
             SlimeMove();
             ChageScale();
         }
+        
     }
-
-    [Header("移動方向")]
-    [SerializeField] private Vector3 velocity;         // 移動方向
-    [Header("移動速度")]
-    [SerializeField] private float moveSpeed = 5.0f;   // 移動速度
+    
+    [SerializeField]
+    [Tooltip("移動方向")]
+    private Vector3 velocity;         // 移動方向
+    [SerializeField] 
+    [Tooltip("移動速度")]
+    private float moveSpeed = 5.0f;   // 移動速度
 
     float total_vel;
 
     void SlimeMove()
     {
+        inputHorizontal = Input.GetAxisRaw("Horizontal");
+        inputVertical = Input.GetAxisRaw("Vertical");
+        Horizontalrotation = Quaternion.AngleAxis(m_mainCamera.transform.eulerAngles.y, Vector3.up);
+
         var velo = Horizontalrotation * new Vector3(inputHorizontal, 0, inputVertical).normalized;
        
-        if (rb.velocity.magnitude < 5)
+        if (rb.velocity.magnitude < m_max_magnitude)
         {
-            rb.AddForce(velo * moveSpeed,ForceMode.Force);
+            rb.AddForce(velo * moveSpeed * Time.deltaTime,ForceMode.Force);
+            //rb.MovePosition(rb.position + velo * moveSpeed * Time.deltaTime);
         }
 
-        
-
-        // キャラクターの向きを進行方向に
+        // 音を鳴らす
         if (velo != Vector3.zero)
         {
             total_vel += velo.magnitude * Time.deltaTime;
-            if(total_vel>= 2.0f)
+            if(total_vel >= 2.0f)
             {
                 GetComponent<SlimeAudio>().PlayFootstepSE();
                 total_vel = 0;
-            }
-            transform.rotation = Quaternion.LookRotation(velo);
+            }    
         }
     }
 
-    [Header("ジャンプパワー")]
-    public float upForce = 200f; //上方向にかける力
-    [Header("着地しているかどうか")]
-    [SerializeField] private bool isGround; //着地しているかどうかの判定
+    [Tooltip("ジャンプパワー")]
+    public float upForce = 200f; //上方向にかける力 
+    [SerializeField] 
+    [Tooltip("着地しているかどうか")]
+    private bool m_is_ground; //着地しているかどうかの判定
+    [SerializeField]
+    [Tooltip("ジャンプしているかどうか")]
+    private bool m_is_jump=false; //着地しているかどうかの判定
+    [SerializeField]
+    [Tooltip("落下しているかどうか")]
+    private bool m_is_falling;
+    [SerializeField] 
+    public GameObject cold_effect;
 
-    [SerializeField] public GameObject cold_effect;
     void Jump()
     {
-        if (isGround == true)//着地しているとき
-        {
-            if (m_state == SLIME_CORE_STATE.COLD) return;
-            
+        //もしY軸の移動速度が0以上なら落下している
+        var y_power = rb.velocity.y;
+        m_is_falling = (y_power < 0) ? true : false;
 
-                if (Input.GetKeyDown("space"))
-                {
-                    isGround = false;//  isGroundをfalseにする
-                    rb.AddForce(new Vector3(0, upForce, 0)); //上に向かって力を加える
-                }
-            
-        }
+        //落下中ではない状態で地面に接すると再びジャンプフラグがONになる
+        if (!m_is_falling&&m_is_ground)m_is_jump = false;
+        
+        if (m_state == SLIME_CORE_STATE.COLD) return;//氷状態なら帰る
+        if (m_is_jump) return;//ジャンプしているなら帰る
+
+        if (Input.GetKeyDown("space"))
+        {
+            Debug.Log("ジャンプしています");
+            m_is_jump = true;
+            m_is_ground = false;//isGroundをfalseにする
+            rb.AddForce(new Vector3(0, upForce, 0)); //上に向かって力を加える
+        }          
+        
     }
 
     
-    [Header("氷のマテリアル")]
-    [SerializeField] public Material[] _material;
-    [SerializeField] public Vector3 target_scale;
+    
+    [SerializeField]
+    [Header("氷のマテリアル")] 
+    public Material[] _material;
+    [SerializeField] 
+    public Vector3 target_scale;
 
-    [SerializeField] public PhysicMaterial[] _physicMaterial;
+    [SerializeField] 
+    public PhysicMaterial[] _physicMaterial;
 
     void ChangeState(GameObject obj)
     {
@@ -167,14 +197,13 @@ public class SlimeCoreController : MonoBehaviour
             Destroy(effect,3.0f);
         }
 
-
-
-
-
     }
 
+
+   
+    [SerializeField] 
     [Header("遷移の時間")]
-    [SerializeField] public float t;
+    public float t;
 
     void ChageScale()
     {
@@ -189,7 +218,7 @@ public class SlimeCoreController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground")) //Groundタグのオブジェクトに触れたとき
         {
-            isGround = true; //isGroundをtrueにする
+            m_is_ground = true; //isGroundをtrueにする
             GetComponent<SlimeAudio>().PlayFootstepSE();
         }
 

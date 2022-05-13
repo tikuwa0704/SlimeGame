@@ -15,6 +15,8 @@ public class BeginStage2State : State<GameManager>
     public override void Enter()
     {
         SlimeCoreController.isActive = false;//プレイヤーを動けなくする
+        SlimeCoreController.rb.velocity = Vector3.zero;
+        SlimeCoreController.rb.isKinematic = true;
 
         m_time_line = GameObject.Find("Stage2BeginEvent").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
@@ -38,6 +40,7 @@ public class BeginStage2State : State<GameManager>
     public override void Exit()
     {
         SlimeCoreController.isActive = true;//プレイヤーを動けなくする
+        SlimeCoreController.rb.isKinematic = false;
 
         m_time_line.Stop();
         //ムービーを始める
