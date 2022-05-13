@@ -8,6 +8,7 @@ public class GameOver1 : MonoBehaviour
     float alfa;
     float speed = 0.005f;
     float red, green, blue;
+    public bool G_Over = false;
 
     void Start()
     {
@@ -20,5 +21,9 @@ public class GameOver1 : MonoBehaviour
     {
         GetComponent<Image>().color = new Color(red, green, blue, alfa);
         alfa += speed;
+        if (alfa >= 1)
+        {
+            G_Over = true;
+        }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Panel : MonoBehaviour
 {
+    int state;
     float alfa;
     float speed = 0.005f;
     float red, green, blue;
@@ -20,5 +21,6 @@ public class Panel : MonoBehaviour
     {
         GetComponent<Image>().color = new Color(red, green, blue, alfa);
         alfa += speed;
+
     }
 }
