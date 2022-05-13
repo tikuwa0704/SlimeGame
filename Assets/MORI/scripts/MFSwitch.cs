@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MFSwitch : MonoBehaviour
 {
-    public GameObject Isitubute;
+   // public GameObject Isitubute;
     public GameObject Isitubute2;
     public GameObject Isitubute3;
     public GameObject Isitubute4;
@@ -15,7 +15,7 @@ public class MFSwitch : MonoBehaviour
         //SlimeChildrenÅió™:SCÅj
         if (collision.gameObject.tag == "SC")
         {
-            Isitubute.SetActive(true);
+           // Isitubute.SetActive(true);
             Isitubute2.SetActive(true);
             Isitubute3.SetActive(true);
             Isitubute4.SetActive(true);

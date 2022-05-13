@@ -18,9 +18,9 @@ public class GameOver2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
 
-           // transform.DOLocalMove(new Vector3(10f, 10f, 0), 0.5f);
+            transform.DOLocalMoveY(100, 2f).SetEase(Ease.OutBounce);
             // ’µ‚Ë‚é‚Á‚Û‚­
-            transform.DOLocalMoveY(-30f, 2f).SetEase(Ease.OutBounce);
+            //transform.DOLocalMoveY(-30f, 2f).SetEase(Ease.OutBounce);
         }
     }
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8133200278567936305}
   - component: {fileID: 1720477502957199572}
   - component: {fileID: 6952871967786687200}
+  - component: {fileID: -2808986535291977861}
   m_Layer: 0
   m_Name: "\u5CA9"
   m_TagString: Syougaibutu
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c34307182ac2cb948a6c9fc586756e14, type: 2}
+  - {fileID: 2100000, guid: 333a08b54ec5eec4f84f74d910ad751e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,3 +113,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2808986535291977861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7140723847967154141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d6141d6b4bfcc468bb2e3500d2c9c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
