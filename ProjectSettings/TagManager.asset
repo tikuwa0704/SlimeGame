@@ -12,6 +12,8 @@ TagManager:
   - SC
   - SlimeChildren
   - SnowBall
+  - KillZone
+  - Fire
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,143 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+using StateMachineAI;
+
+
+public interface IGameService
+{
+    void SetCrrentCheckPoint(int stageNum);
+
+    Vector3 GetCrrentCheckPoint();
+
+    void CheckPoint();
+
+    float GetLimitTime();
+
+    int GetCurrentScore();
+}
+
+
+public enum E_GAME_MANAGER_STATE
+{
+    NONE,//何もしない
+    BEGIN_STAGE1,//ステージ1の開始
+    READY_STAGE1,//ステージ1のファンファーレ
+    EXE_STAGE1,//ステージ1挑戦中
+    FIN_STAGE1,//ステージ1の終了
+    CONECT_1TO2,//ステージ1と2の途中
+    BEGIN_STAGE2,//ステージ2開始ムービー
+    READY_STAGE2,//ステージ2のファンファーレ
+    EXE_STAGE2,//ステージ2挑戦中
+    FIN_STAGE2,//ステージ2の終了
+}
+
+public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE> , IGameService
+{
+  
+    [SerializeField]
+    [Tooltip("現在のステージ番号")]
+    public int stageNum;
+
+    [SerializeField]
+    [Tooltip("メインカメラ")]
+    public GameObject m_mainCamera;
+    [SerializeField]
+    [Tooltip("サブカメラ")]
+    public GameObject m_subCamera;
+
+    [SerializeField]
+    [Tooltip("チェックポイントの配列")]
+    List<Transform> m_checkPointArray;
+
+    [SerializeField]
+    [Tooltip("リスタート時に開始する現在の地点")]
+    private Transform m_crrentCheckPoint;
+
+    [SerializeField]
+    [Tooltip("スライムコア")]
+    private GameObject m_slime;
+
+    [SerializeField]
+    [Tooltip("現在のステージのスコア")]
+    public int currentScore;
+
+    [SerializeField]
+    [Tooltip("各ステージのスコア(3ステージ分)")]
+    public int[] gameScore = new int[3];
+
+    [SerializeField]
+    [Tooltip("各ステージの制限時間")]
+    public float[] gameLimitTimes = new float[3];
+
+    [SerializeField]
+    [Tooltip("現在の制限時間")]
+    public float currentGameLimitTime;
+
+
+    private void Awake()
+    {
+        
+        //ステートを登録する
+        stateList.Add(new NoneState(this));
+        stateList.Add(new BeginState1State(this));
+        stateList.Add(new ReadyStage1State(this));
+        stateList.Add(new ExeStage1State(this));
+        stateList.Add(new FinStage1State(this));
+        stateList.Add(new Conect1to2State(this));
+        stateList.Add(new BeginStage2State(this));
+        stateList.Add(new ExeStage2State(this));
+        stateList.Add(new ExeStage2State(this));
+
+        stateMachine = new StateMachine<GameManager>();
+
+        ChangeState(E_GAME_MANAGER_STATE.BEGIN_STAGE1);
+
+       
+    }
+
+    public void SetCrrentCheckPoint(int stageNum)
+    {
+        int idx = stageNum - 1;
+        m_crrentCheckPoint = m_checkPointArray[idx];
+    }
+
+
+    public Vector3 GetCrrentCheckPoint()
+    {
+        return m_crrentCheckPoint.position;
+    }
+    
+    //スライムをチェックポイントに戻す処理
+    public void CheckPoint() {
+
+        SlimeManager slimeManager = SlimeManager.Instance;
+        GameObject slime = slimeManager.gameObject;
+        
+        //スライムを消す
+        slimeManager.DestorySlime();
+        //プレイヤーを位置チェックポイントの位置に持ってくる
+        //チェックポイントに戻る
+        Vector3 point = GetCrrentCheckPoint();
+        m_slime.transform.position = point;
+        m_slime.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //子スライムを生成する氷状態では生成しない
+
+        slimeManager.ChangeState(E_SLIMES_STATE.E_NORMAL);
+        slimeManager.GenerateSlime(100);
+    }
+
+    public float GetLimitTime()
+    {
+        return currentGameLimitTime;
+    }
+
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
+
+}
+
