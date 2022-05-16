@@ -29,7 +29,6 @@ public enum E_GAME_MANAGER_STATE
     FIN_STAGE1,//ステージ1の終了
     CONECT_1TO2,//ステージ1と2の途中
     BEGIN_STAGE2,//ステージ2開始ムービー
-    READY_STAGE2,//ステージ2のファンファーレ
     EXE_STAGE2,//ステージ2挑戦中
     FIN_STAGE2,//ステージ2の終了
 }
@@ -89,7 +88,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         stateList.Add(new Conect1to2State(this));
         stateList.Add(new BeginStage2State(this));
         stateList.Add(new ExeStage2State(this));
-        stateList.Add(new ExeStage2State(this));
+        stateList.Add(new FinStage2State(this));
 
         stateMachine = new StateMachine<GameManager>();
 

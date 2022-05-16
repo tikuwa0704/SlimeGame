@@ -27,7 +27,7 @@ public class BeginState1State : State<GameManager>
         // カーソルを画面中央にロックする
         Cursor.lockState = CursorLockMode.Locked;
 
-        TimeLine = GameObject.Find("StageBeginTimeLine").GetComponent<PlayableDirector>();
+        TimeLine = GameObject.Find("Stage1BeginEvent").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
         TimeLine.Play();
         //ムービーを始める

@@ -29,7 +29,7 @@ public class FinStage1State : State<GameManager>
         owner.currentScore = score;
 
 
-        m_time_line = GameObject.Find("WallUpEvent").GetComponent<PlayableDirector>();
+        m_time_line = GameObject.Find("Stage1EndEvent").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
         m_time_line.Play();
         //ムービーを始める

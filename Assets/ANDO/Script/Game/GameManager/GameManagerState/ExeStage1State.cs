@@ -20,7 +20,7 @@ public class ExeStage1State : State<GameManager>
 
         fin_stage_collide = GameObject.Find("Stage1FinCollide").GetComponent<CollideJudger>();
 
-        //スライムを動けるようにする
+        //スライムを動けないようにする
         SlimeManager.Instance.StopPause();
 
         
