@@ -12,9 +12,12 @@ public interface ISoundService
     void Stop(string name);
     void Pause(string name);
     void Stop();
+
+    void FadeOut(string name,float fadeTime);
+    void FadeIn(string name,float fadeTime);
 }
 
-public class SoundManager : MonoBehaviour,ISoundService
+public class SoundManager : MonoBehaviour, ISoundService
 {
     [System.Serializable]
     public class SoundData
@@ -32,6 +35,15 @@ public class SoundManager : MonoBehaviour,ISoundService
     //AudioSource（スピーカー）を同時に鳴らしたい音の数だけ用意
     private AudioSource[] audioSourceList = new AudioSource[20];
 
+    public class FadeAudioSource
+    {
+        public AudioSource source;//オーディオソース
+        public float fadeTime;//フェードの時間
+        public bool isFadeIn;//フェードインかアウトか
+    }
+
+    private List<FadeAudioSource> fadeAudioSources = new List<FadeAudioSource>();
+
     private void Awake()
     {
         //DontDestroyObjectManager.DontDestroyOnLoad(this.gameObject);
@@ -46,6 +58,44 @@ public class SoundManager : MonoBehaviour,ISoundService
         foreach (var soundData in soundDatas)
         {
             soundDictionary.Add(soundData.name, soundData);
+        }
+    }
+
+    private void Update()
+    {
+        FadeAudio();
+    }
+
+    void FadeAudio()
+    {
+        if(fadeAudioSources.Count <= 0) return;
+        //
+        for(int i =0;i < fadeAudioSources.Count;i++)
+        {
+            FadeAudioSource fadeAudioSource = fadeAudioSources[i];
+            if (fadeAudioSource.isFadeIn)
+            {
+                AudioSource source = fadeAudioSource.source;
+                if ((!source.isPlaying) && (source.volume >= 1))
+                {
+                    fadeAudioSources.RemoveAt(i);
+                    continue;
+                }
+                source.volume += (Time.deltaTime) / fadeAudioSource.fadeTime;
+
+            }
+            else
+            { 
+                AudioSource source = fadeAudioSource.source;
+                if ((!source.isPlaying) && (source.volume <= 0)) {
+                    source.volume = 1;
+                    fadeAudioSources.RemoveAt(i);
+                    continue;
+                }
+                source.volume += (Time.deltaTime  * -1) / fadeAudioSource.fadeTime;
+
+            }
+
         }
     }
 
@@ -207,8 +257,56 @@ public class SoundManager : MonoBehaviour,ISoundService
         }
     }
 
-    public void FadeIn()
+    public void FadeIn(AudioClip clip, float fadeTime)
     {
+        var audioSources = GetUsingAudioSources(clip);
+        if (audioSources == null) return; //一時停止するものがありませんでした
+        foreach (AudioSource audioSource in audioSources)
+        {
+            FadeAudioSource fadeAudioSource = new FadeAudioSource();
+            audioSource.volume = 0;
+            fadeAudioSource.source = audioSource;
+            fadeAudioSource.fadeTime = fadeTime;
+            fadeAudioSource.isFadeIn = true;
+            fadeAudioSources.Add(fadeAudioSource);
+        }
+    }
 
+    public void FadeIn(string name, float fadeTime)
+    {
+        if (soundDictionary.TryGetValue(name, out var soundData)) //管理用Dictionary から、別名で探索
+        {
+            FadeIn(soundData.audioClip, fadeTime); //見つかったら、ミュート
+        }
+        else
+        {
+            Debug.LogWarning($"その別名は登録されていません:{name}");
+        }
+    }
+
+    public void FadeOut(AudioClip clip,float fadeTime)
+    {
+        var audioSources = GetUsingAudioSources(clip);
+        if (audioSources == null) return; //一時停止するものがありませんでした
+        foreach (AudioSource audioSource in audioSources)
+        {
+            FadeAudioSource fadeAudioSource = new FadeAudioSource();
+            fadeAudioSource.source = audioSource;
+            fadeAudioSource.fadeTime = fadeTime;
+            fadeAudioSource.isFadeIn = false;
+            fadeAudioSources.Add(fadeAudioSource);   
+        }
+    }
+
+    public void FadeOut(string name, float fadeTime)
+    {
+        if (soundDictionary.TryGetValue(name, out var soundData)) //管理用Dictionary から、別名で探索
+        {
+            FadeOut(soundData.audioClip,fadeTime); //見つかったら、ミュート
+        }
+        else
+        {
+            Debug.LogWarning($"その別名は登録されていません:{name}");
+        }
     }
 }

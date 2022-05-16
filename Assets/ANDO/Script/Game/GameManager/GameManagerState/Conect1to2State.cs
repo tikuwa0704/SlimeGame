@@ -15,6 +15,8 @@ public class Conect1to2State : State<GameManager>
         owner.SetCrrentCheckPoint(2);
 
         fin_stage_collide = GameObject.Find("Stage2StartCollide").GetComponent<CollideJudger>();
+
+        ServiceLocator<ISoundService>.Instance.Play("BGM_サンタクロースの鈴",true);
     }
 
 

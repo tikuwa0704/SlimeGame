@@ -12,31 +12,41 @@ public class FinStage2State : State<GameManager>
 
 
     PlayableDirector m_time_line;
+    PlayableDirector m_time_lineScore;
 
     public override void Enter()
     {
-        ServiceLocator<ISoundService>.Instance.Stop("BGM_TEST");
+        ServiceLocator<ISoundService>.Instance.FadeOut("BGM_クリスマスパーティ",1);
        
 
         //プレイヤーを動けなくする
         SlimeManager.Instance.StartPause();
+
 
         //スコアを格納
         //残り時間を取得
         var limit = owner.currentGameLimitTime;
         int basicScore = 100;
         int score = (int)limit * basicScore;
-        owner.gameScore[0] = score;
+        owner.gameScore[owner.stageNum - 1] = score;
         owner.currentScore = score;
+        int s = 0;
+        foreach (int i in owner.gameScore)
+        {
+            s += i;
+        }
+        owner.totalScore = s;
 
 
-        m_time_line = GameObject.Find("WallUpEvent").GetComponent<PlayableDirector>();
+        m_time_line = GameObject.Find("Stage2EndEvent").GetComponent<PlayableDirector>();
+        m_time_lineScore = GameObject.Find("ScoreEvent").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
         m_time_line.Play();
+        m_time_lineScore.Play();
         //ムービーを始める
+       
 
-        owner.m_mainCamera.SetActive(false);
-        owner.m_subCamera.SetActive(true);
+        
     }
 
     public override void Execute()
@@ -44,7 +54,7 @@ public class FinStage2State : State<GameManager>
 
         if (m_time_line.time >= 13)
         {
-            owner.ChangeState(E_GAME_MANAGER_STATE.CONECT_1TO2);
+            owner.ChangeState(E_GAME_MANAGER_STATE.CONECT_2TO3);
 
         }
     }
@@ -54,7 +64,7 @@ public class FinStage2State : State<GameManager>
         SlimeManager.Instance.StopPause();
 
         m_time_line.Stop();
-        owner.m_mainCamera.SetActive(true);
-        owner.m_subCamera.SetActive(false);
+        m_time_lineScore.Stop();
+       
     }
 }

@@ -18,6 +18,7 @@ public class TutorialManager : MonoBehaviour
     // チュートリアルタスク
     protected ITutorialTask currentTask;
     protected List<ITutorialTask> tutorialTask;
+    protected List<List<ITutorialTask>> tutorialTaskList = new List<List<ITutorialTask>>();
 
     // チュートリアル表示フラグ
     private bool isEnabled;
@@ -35,12 +36,17 @@ public class TutorialManager : MonoBehaviour
         TutorialTitle = tutorialTextArea.Find("Title").GetComponent<Text>();
         TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<Text>();
 
-        // チュートリアルの一覧
-        tutorialTask = new List<ITutorialTask>()
+        tutorialTaskList.Add(new List<ITutorialTask>()
         {
             new MoveTutorialTask(),
             new JumpTurorialTask(),
-        };
+            new ThrowSlimeTutorialTask(),
+            new GoalTutorialTask(),
+            new SlimeChildTutorialTask()
+        }); 
+
+        // チュートリアルの一覧
+        tutorialTask = tutorialTaskList[0];
 
         // 最初のチュートリアルを設定
         StartCoroutine(SetCurrentTask(tutorialTask.First()));
@@ -118,5 +124,15 @@ public class TutorialManager : MonoBehaviour
         // UIの表示切り替え
         float alpha = isEnabled ? 1f : 0;
         tutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
+    }
+
+    public void SetTask(int num)
+    {
+        tutorialTask = tutorialTaskList[num];
+
+        // 最初のチュートリアルを設定
+        StartCoroutine(SetCurrentTask(tutorialTask.First()));
+
+        isEnabled = true;
     }
 }

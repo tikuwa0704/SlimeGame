@@ -161,6 +161,17 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
         }
     }
 
+    public void GenerateSlime(Vector3 point)
+    {
+
+        //親スライムの地点
+        Vector3 parentPosition = transform.position;
+
+        GameObject obj = Instantiate(childSlimePrefab, point, childSlimePrefab.transform.rotation);
+
+        obj.transform.parent = childrenSlimeParent.transform;
+    }
+
 
     //子スライムたちを消去
     public void DestorySlime()
@@ -179,7 +190,7 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
         //プレイヤーを動けなくする
         isActive = false;
         rigidBody.velocity = Vector3.zero;
-        rigidBody.isKinematic = true;
+        //rigidBody.isKinematic = true;
         
     }
 
@@ -187,7 +198,98 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
     {
         //プレイヤーを動けるようにする
         isActive = true;
-        rigidBody.isKinematic = false;
+        //rigidBody.isKinematic = false;
+
+    }
+
+    //くっついているスライムの中で一番遠いスライムを前方に飛ばす通常状態だけ
+    public void ThrowSlimeFar(float power)
+    {
+
+        Transform slime;
+        if(slime= GetFarStickSlime(mainCamera.transform.position))
+        {
+            //とれたなら投げる
+            Rigidbody rb = slime.GetComponent<Rigidbody>();
+            
+            rb.AddForce(mainCamera.transform.forward * power);
+            SlimeContoroller slime1 =  slime.GetComponent<SlimeContoroller>();
+            slime1.m_state = SlimeContoroller.E_SLIME_STATE.eThrow;
+            slime1.m_is_sticking = false;
+        }
+
+    }
+        
+    //くっついている中で地点から一番遠いスライムを取得
+    public Transform GetFarStickSlime(Vector3 pos)
+    {
+        var children = childrenSlimeParent.GetComponentInChildren<Transform>();
+
+        float currentLength = 0;
+        Transform o = null;
+
+        foreach (Transform obj in children)
+        {
+            SlimeContoroller slime = obj.gameObject.GetComponent<SlimeContoroller>();
+            //くっついてないなら判定しない
+            if (!slime.m_is_sticking) continue;
+
+            float length = (pos - obj.position).magnitude;
+
+            if (length > currentLength)
+            {
+                currentLength = length;
+                o = obj;
+            }
+
+        }
+
+        return o;
+
+    }
+
+    public void ThrowSlimeNear(float power)
+    {
+
+        Transform slime;
+        if (slime = GetNearStickSlime(mainCamera.transform.position))
+        {
+            //とれたなら投げる
+            Rigidbody rb = slime.GetComponent<Rigidbody>();
+
+            rb.AddForce(-mainCamera.transform.forward * power);
+            SlimeContoroller slime1 = slime.GetComponent<SlimeContoroller>();
+            slime1.m_state = SlimeContoroller.E_SLIME_STATE.eThrow;
+            slime1.m_is_sticking = false;
+        }
+
+    }
+
+    //くっついている中で地点から一番近いスライムを取得
+    public Transform GetNearStickSlime(Vector3 pos)
+    {
+        var children = childrenSlimeParent.GetComponentInChildren<Transform>();
+
+        float currentLength = float.MaxValue;
+        Transform o = null;
+
+        foreach (Transform obj in children)
+        {
+            SlimeContoroller slime = obj.gameObject.GetComponent<SlimeContoroller>();
+            //くっついてないなら判定しない
+            if (!slime.m_is_sticking) continue;
+
+            float length = (pos - obj.position).magnitude;
+
+            if (length < currentLength)
+            {
+                currentLength = length;
+                o = obj;
+            }
+
+        }
+
+        return o;
 
     }
 

@@ -51,13 +51,11 @@ public class ReadyStage1State : State<GameManager>
                 case 1:
                     owner.ChangeState(E_GAME_MANAGER_STATE.EXE_STAGE1);
                     break;
-
                 case 2:
                     owner.ChangeState(E_GAME_MANAGER_STATE.EXE_STAGE2);
                     break;
-
                 case 3:
-                    owner.ChangeState(E_GAME_MANAGER_STATE.EXE_STAGE1);
+                    owner.ChangeState(E_GAME_MANAGER_STATE.EXE_STAGE3);
                     break;
             }
             

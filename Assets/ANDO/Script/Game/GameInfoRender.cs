@@ -64,6 +64,6 @@ public class GameInfoRender : MonoBehaviour
 
     public void SetTargetScore()
     {
-        targetTotalScore = ServiceLocator<IGameService>.Instance.GetCurrentScore();
+        targetTotalScore = ServiceLocator<IGameService>.Instance.GetTotalScore();
     }
 }

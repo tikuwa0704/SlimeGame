@@ -17,6 +17,8 @@ public interface IGameService
     float GetLimitTime();
 
     int GetCurrentScore();
+
+    int GetTotalScore();
 }
 
 
@@ -31,6 +33,10 @@ public enum E_GAME_MANAGER_STATE
     BEGIN_STAGE2,//ステージ2開始ムービー
     EXE_STAGE2,//ステージ2挑戦中
     FIN_STAGE2,//ステージ2の終了
+    CONECT_2TO3,//ステージ2と3の途中
+    BEGIN_STAGE3,//ステージ3開始ムービー
+    EXE_STAGE3,//ステージ3挑戦中
+    FIN_STAGE3,//ステージ3の終了
 }
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE> , IGameService
@@ -58,6 +64,10 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
     [SerializeField]
     [Tooltip("スライムコア")]
     private GameObject m_slime;
+
+    [SerializeField]
+    [Tooltip("全ステージ合計のスコア")]
+    public int totalScore;
 
     [SerializeField]
     [Tooltip("現在のステージのスコア")]
@@ -89,6 +99,10 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         stateList.Add(new BeginStage2State(this));
         stateList.Add(new ExeStage2State(this));
         stateList.Add(new FinStage2State(this));
+        stateList.Add(new Conect2to3State(this));
+        stateList.Add(new BeginState3State(this));
+        stateList.Add(new ExeStage3State(this));
+        //stateList.Add(new FinStage3State(this));
 
         stateMachine = new StateMachine<GameManager>();
 
@@ -136,6 +150,11 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
     public int GetCurrentScore()
     {
         return currentScore;
+    }
+
+    public int GetTotalScore()
+    {
+        return totalScore;
     }
 
 }

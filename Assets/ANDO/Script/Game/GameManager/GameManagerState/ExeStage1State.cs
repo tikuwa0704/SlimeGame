@@ -14,7 +14,8 @@ public class ExeStage1State : State<GameManager>
 
     public override void Enter()
     {
-        ServiceLocator<ISoundService>.Instance.Play("BGM_シャイニングスター");
+        
+        ServiceLocator<ISoundService>.Instance.Play("BGM_みんなであそぼう",true);
 
         ServiceLocator<IUIService>.Instance.SetUIActive("チュートリアルテキストエリア", true);
 

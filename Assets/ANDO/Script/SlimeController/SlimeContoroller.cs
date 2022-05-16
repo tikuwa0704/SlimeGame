@@ -9,6 +9,7 @@ public class SlimeContoroller : MonoBehaviour
         eIdle,
         eCold,
         eHot,
+        eThrow,
     }
 
     [SerializeField] 
@@ -25,9 +26,4 @@ public class SlimeContoroller : MonoBehaviour
         m_state = E_SLIME_STATE.eHot;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -42,13 +42,14 @@ public class BeginStage2State : State<GameManager>
 
     public override void Exit()
     {
-        SlimeManager.Instance.StopPause();
-
+        
         m_time_line.Stop();
         //ムービーを始める
 
         owner.m_mainCamera.SetActive(true);
         owner.m_subCamera.SetActive(false);
+
+        ServiceLocator<ISoundService>.Instance.FadeOut("BGM_サンタクロースの鈴",5);
     }
 
 }

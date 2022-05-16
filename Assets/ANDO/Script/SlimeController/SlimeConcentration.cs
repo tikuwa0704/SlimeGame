@@ -49,7 +49,10 @@ public class SlimeConcentration : MonoBehaviour
 
 			Vector3 dir = this.transform.position - ob.position;
 			SlimeContoroller slime_con = ob.gameObject.GetComponent<SlimeContoroller>();
-				
+
+            if (dir.magnitude <= 1) { slime_con.m_state = SlimeContoroller.E_SLIME_STATE.eIdle; }
+			if (slime_con.m_state == SlimeContoroller.E_SLIME_STATE.eThrow) continue;
+
 			if (dir.magnitude <= m_stick_rad)
 			{
 				slime_con.m_is_sticking = true;

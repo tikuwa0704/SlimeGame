@@ -12,9 +12,11 @@ public class ExeStage2State : State<GameManager>
 
     public override void Enter()
     {
-        ServiceLocator<ISoundService>.Instance.Play("BGM_TEST",true);
+        ServiceLocator<ISoundService>.Instance.Play("BGM_クリスマスパーティ",true);
 
         fin_stage_collide = GameObject.Find("Stage2FinCollide").GetComponent<CollideJudger>();
+
+        SlimeManager.Instance.StopPause();
 
         Debug.Log("２実行");
     }
@@ -33,7 +35,7 @@ public class ExeStage2State : State<GameManager>
 
         if (fin_stage_collide.m_is_collide)
         {
-            //owner.ChangeState(E_GAME_MANAGER_STATE.FIN_STAGE2);
+            owner.ChangeState(E_GAME_MANAGER_STATE.FIN_STAGE2);
         }
     }
 

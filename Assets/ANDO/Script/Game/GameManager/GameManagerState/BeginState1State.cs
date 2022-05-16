@@ -8,17 +8,17 @@ public class BeginState1State : State<GameManager>
 {
 
     public BeginState1State(GameManager owner) : base(owner){}
-
-    private PlayableDirector TimeLine;
+    //イベント用のタイムライン
+    private PlayableDirector timeLine;
 
     public override void Enter()
     {
+        //合計スコア初期化
+        owner.totalScore = 0;
         //現在のステージ設定
         owner.stageNum = 1;
-
         //タイムリミット設定
         owner.currentGameLimitTime = owner.gameLimitTimes[owner.stageNum - 1];
-
         //チェックポイント設定
         owner.SetCrrentCheckPoint(owner.stageNum);
 
@@ -27,42 +27,47 @@ public class BeginState1State : State<GameManager>
         // カーソルを画面中央にロックする
         Cursor.lockState = CursorLockMode.Locked;
 
-        TimeLine = GameObject.Find("Stage1BeginEvent").GetComponent<PlayableDirector>();
+        //今回のタイムライン用のオブジェクトを見つける
+        timeLine = GameObject.Find("Stage1BeginEvent").GetComponent<PlayableDirector>();
         //ステージのタイムラインをONに
-        TimeLine.Play();
+        timeLine.Play();
         //ムービーを始める
 
         //プレイヤーを動けなくする
         SlimeManager.Instance.StartPause();
 
-        //カメラ制御
+        //カメラ切り替え
         owner.m_mainCamera.SetActive(false);
         owner.m_subCamera.SetActive(true);
+
+        //BGM再生
+        ServiceLocator<ISoundService>.Instance.Play("BGM_リコーダーマーチ");
 
     }
 
     public override void Execute()
     {
-        
-        if (TimeLine.time >= 10)
+        //タイムラインが10秒を超えたら遷移
+        if (timeLine.time >= 10)
         {
-
             owner.ChangeState(E_GAME_MANAGER_STATE.READY_STAGE1);
-
         }
-
-        if (TimeLine.time < 9 && Input.GetKeyDown(KeyCode.Mouse0))
+        //クリックでイベントスキップ
+        if (timeLine.time < 9 && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            TimeLine.time = 9;
+            timeLine.time = 9;
         }
 
     }
 
     public override void Exit()
     {
-        TimeLine.Pause();
-        //カメラの移動はできるようにする
+        //タイムラインを止める
+        timeLine.Stop();
+        //カメラを切り替える
         owner.m_mainCamera.SetActive(true);
         owner.m_subCamera.SetActive(false);
+        //BGMをフェードアウトさせる
+        ServiceLocator<ISoundService>.Instance.FadeOut("BGM_リコーダーマーチ",3);
     }
 }

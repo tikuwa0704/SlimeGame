@@ -10,6 +10,13 @@ public class TitleTransition : MonoBehaviour
 
     [SerializeField] GameObject menu;
 
+    private void Start()
+    {
+        
+
+
+    }
+
     public void ClickOnTheScreen()
     {
         //メニュー選択に切り替わる
@@ -48,7 +55,6 @@ public class TitleTransition : MonoBehaviour
 
 	IEnumerator LoadData()
 	{
-		Debug.Log("通ってます");
 		// シーンの読み込みをする
 		async = SceneManager.LoadSceneAsync("GameScene");
 

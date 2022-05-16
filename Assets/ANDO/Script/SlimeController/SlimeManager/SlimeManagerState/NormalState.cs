@@ -37,6 +37,7 @@ public class NormalState : State<SlimeManager>
         
         Move();
         Jump();
+        ThrowSlime();
         ChageScale();
     }
 
@@ -102,5 +103,19 @@ public class NormalState : State<SlimeManager>
             owner.transform.localScale = owner.transform.localScale * (1 - owner.t) + owner.target_scale * owner.t;
             owner.t += Time.deltaTime / 5.0f;
         }
+    }
+
+    void ThrowSlime()
+    {
+        if (!owner.isActive) return;
+        if (owner.m_is_jump) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            owner.ThrowSlimeNear(300);
+
+
+        }
+        
     }
 }
