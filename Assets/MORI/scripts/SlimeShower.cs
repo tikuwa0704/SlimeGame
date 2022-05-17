@@ -20,7 +20,7 @@ public class SlimeShower : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (Heel <= 99)
+            if (Heel <= 49)
             {
                 slimeshower();
                 Heel++;

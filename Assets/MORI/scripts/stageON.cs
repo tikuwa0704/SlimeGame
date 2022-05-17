@@ -8,6 +8,7 @@ public class stageON : MonoBehaviour
     public GameObject stonemaker;
     public GameObject Goal;
     public GameObject Gate;
+    public GameObject Fire;
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -16,6 +17,7 @@ public class stageON : MonoBehaviour
             Destroy(stonemaker.gameObject);
             Destroy(Goal.gameObject);
             Destroy(Gate.gameObject);
+            Fire.SetActive(true);
         }
     }
 }

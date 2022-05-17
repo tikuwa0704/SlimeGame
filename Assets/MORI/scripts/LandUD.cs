@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LandUD : MonoBehaviour
 {
-    public GameObject Magma;
+    //public GameObject Magma;
     public bool Down=false;
     public float down;
 
@@ -23,4 +23,5 @@ public class LandUD : MonoBehaviour
             Down = true;
         }
     }
+
 }

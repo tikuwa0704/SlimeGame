@@ -27,6 +27,9 @@ public class Stagemaker : MonoBehaviour
             {
                 Stage();
                 ON = true;
+                Switch1.GetComponent<WSwitch1>().Switch = false;
+                Switch2.GetComponent<WSwitch1>().Switch = false;
+                Switch3.GetComponent<WSwitch1>().Switch = false;
             }
         }
     }
