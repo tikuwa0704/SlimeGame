@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class GameClear2 : MonoBehaviour
+public class GameOverP2 : MonoBehaviour
 {
-
     [SerializeField] private GameObject Back_Ground;
 
     GameObject object1;
 
     public static int State;
-
+    public bool G_Over_Change = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +23,10 @@ public class GameClear2 : MonoBehaviour
     {
         if (Back_Ground)
         {
-            var back_Ground = Back_Ground.GetComponent<GameClear1>();
-            if (back_Ground.G_Clear)
+            var back_Ground = Back_Ground.GetComponent<GameOverP1>();
+            if (back_Ground.G_Over)
             {
-                if (State <= 10)
+                if (State <= 200)
                 {
                     State++;
                 }
@@ -35,6 +34,12 @@ public class GameClear2 : MonoBehaviour
                 if (State == 10)
                 {
                     object1.transform.DOLocalMoveY(100, 2f).SetEase(Ease.OutBounce);
+
+                }
+
+                if (State == 200)
+                {
+                    G_Over_Change = true;
                 }
             }
         }

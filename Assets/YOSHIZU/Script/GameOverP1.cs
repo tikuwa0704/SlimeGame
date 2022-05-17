@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameClear1 : MonoBehaviour
+public class GameOverP1 : MonoBehaviour
 {
     float alfa;
     float speed = 0.01f;
     float red, green, blue;
-    public bool G_Clear@= false;
+    public bool G_Over = false;
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class GameClear1 : MonoBehaviour
         alfa += speed;
         if (alfa >= 1)
         {
-            G_Clear = true;
+            G_Over = true;
         }
     }
 }
