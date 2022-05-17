@@ -12,7 +12,7 @@ public class GameClear2 : MonoBehaviour
     GameObject object1;
 
     public static int State;
-
+    public bool G_Clear_Change = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,7 @@ public class GameClear2 : MonoBehaviour
             var back_Ground = Back_Ground.GetComponent<GameClear1>();
             if (back_Ground.G_Clear)
             {
-                if (State <= 10)
+                if (State <= 200)
                 {
                     State++;
                 }
@@ -35,6 +35,12 @@ public class GameClear2 : MonoBehaviour
                 if (State == 10)
                 {
                     object1.transform.DOLocalMoveY(100, 2f).SetEase(Ease.OutBounce);
+
+                }
+
+                if (State == 200)
+                {
+                    G_Clear_Change = true;
                 }
             }
         }
