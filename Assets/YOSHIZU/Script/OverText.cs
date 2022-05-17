@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClearText : MonoBehaviour
+public class OverText : MonoBehaviour
 {
     [SerializeField] private GameObject Hukidasi;
 
-    private string cliarText = "やっとクリア？おめww";
+    private string  overText = "はい、やり直しww";
     private string[] Words;
     public Text textLabel;
 
@@ -23,8 +23,8 @@ public class ClearText : MonoBehaviour
     {
         if (Hukidasi)
         {
-            var hukidasi = Hukidasi.GetComponent<GameClear2>();
-            if (hukidasi.G_Clear_Change)
+            var hukidasi = Hukidasi.GetComponent<GameOverP2>();
+            if (hukidasi.G_Over_Change)
             {
                 if (C <= 10)
                 {
@@ -32,7 +32,7 @@ public class ClearText : MonoBehaviour
                 }
                 if (C == 10)
                 {
-                    Words = cliarText.Split(' ');
+                    Words = overText.Split(' ');
 
                     foreach (var Wold in Words)
                     {
