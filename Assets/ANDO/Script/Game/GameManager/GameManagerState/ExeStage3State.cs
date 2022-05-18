@@ -14,7 +14,10 @@ public class ExeStage3State : State<GameManager>
 
     public override void Enter()
     {
-        ServiceLocator<ISoundService>.Instance.Play("BGM_TEST", true);
+        //ServiceLocator<ISoundService>.Instance.FadeOut("BGM_ënë¢Ç∑ÇÈé“", 1);
+
+        //ServiceLocator<ISoundService>.Instance.Play("BGM_çUèÈêÌ", true);
+
 
         fin_stage_collide = GameObject.Find("Stage3EndCollide").GetComponent<CollideJudger>();
 

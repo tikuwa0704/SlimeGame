@@ -25,18 +25,7 @@ public class FinStage2State : State<GameManager>
 
         //スコアを格納
         //残り時間を取得
-        var limit = owner.currentGameLimitTime;
-        var num = SlimeManager.Instance.GetSlimeNum();
-        int basicScore = 100;
-        int score = ((int)limit + num) * basicScore;
-        owner.gameScore[owner.stageNum - 1] = score;
-        owner.currentScore = score;
-        int s = 0;
-        foreach (int i in owner.gameScore)
-        {
-            s += i;
-        }
-        owner.totalScore = s;
+        owner.SetScore();
 
 
         m_time_line = GameObject.Find("Stage2EndEvent").GetComponent<PlayableDirector>();

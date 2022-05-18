@@ -72,6 +72,12 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
     [Tooltip("ジャンプしているかどうか")]
     public bool m_is_jump = false; //着地しているかどうかの判定
     [SerializeField]
+    [Tooltip("ジャンプの可能回数")]
+    public int jumpCountMax; 
+    [SerializeField]
+    [Tooltip("ジャンプの回数")]
+    public int jumpCount=0;
+    [SerializeField]
     [Tooltip("落下しているかどうか")]
     public bool m_is_falling;
     [SerializeField]
@@ -92,16 +98,20 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
     public float t;
 
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    //Groundタグのオブジェクトに触れたとき
-    //    if (collision.gameObject.CompareTag("Ground")) 
-    //    {
-    //        m_is_ground = true; //isGroundをtrueにする
-    //        GetComponent<SlimeAudio>().PlayFootstepSE();
-    //    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 衝突位置を取得する
+        Vector3 hitPos = collision.contacts[0].point;
 
-    //}
+        Vector3 dir = hitPos - this.transform.position;
+        if (dir.y<0)
+        {
+            jumpCount = 0;
+            //m_is_ground = true; //isGroundをtrueにする
+            GetComponent<SlimeAudio>().PlayFootstepSE();
+        }
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -123,15 +133,15 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
         }
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        //Groundタグのオブジェクトに触れている
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            m_is_ground = true; //isGroundをtrueにする
-            //GetComponent<SlimeAudio>().PlayFootstepSE();
-        }
-    }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    //Groundタグのオブジェクトに触れている
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        m_is_ground = true; //isGroundをtrueにする
+    //        //GetComponent<SlimeAudio>().PlayFootstepSE();
+    //    }
+    //}
 
     //自分の周りに子スライムを生成
     public void GenerateSlime(int spawnNum)
