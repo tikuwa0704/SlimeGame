@@ -293,4 +293,9 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
 
     }
 
+    public int GetSlimeNum()
+    {
+        return GetComponent<SlimeConcentration>().m_stick_num;
+    }
+
 }

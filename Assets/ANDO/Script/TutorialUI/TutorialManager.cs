@@ -43,7 +43,17 @@ public class TutorialManager : MonoBehaviour
             new ThrowSlimeTutorialTask(),
             new GoalTutorialTask(),
             new SlimeChildTutorialTask()
-        }); 
+        });
+
+        tutorialTaskList.Add(new List<ITutorialTask>()
+        {
+            new IceTutorialTask(),
+        });
+
+        tutorialTaskList.Add(new List<ITutorialTask>()
+        {
+            new WeightTutorialTask(),
+        });
 
         // チュートリアルの一覧
         tutorialTask = tutorialTaskList[0];
@@ -128,10 +138,18 @@ public class TutorialManager : MonoBehaviour
 
     public void SetTask(int num)
     {
-        tutorialTask = tutorialTaskList[num];
+        bool isSet = (tutorialTask.Count<=0)? true : false;
+
+        foreach(var i in tutorialTaskList[num])
+        {
+            tutorialTask.Add(i);
+        }
 
         // 最初のチュートリアルを設定
-        StartCoroutine(SetCurrentTask(tutorialTask.First()));
+        if (isSet)
+        {
+            StartCoroutine(SetCurrentTask(tutorialTask.First()));
+        }
 
         isEnabled = true;
     }

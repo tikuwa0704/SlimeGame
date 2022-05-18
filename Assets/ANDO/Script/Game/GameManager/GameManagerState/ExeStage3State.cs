@@ -21,6 +21,15 @@ public class ExeStage3State : State<GameManager>
         SlimeManager.Instance.StopPause();
 
         Debug.Log("3実行");
+
+        GameObject tutorial;
+
+        if (tutorial = ServiceLocator<IUIService>.Instance.GetUIObject("チュートリアルテキストエリア"))
+        {
+
+            tutorial.GetComponent<TutorialManager>().SetTask(owner.stageNum - 1);
+
+        }
     }
 
     public override void Execute()
