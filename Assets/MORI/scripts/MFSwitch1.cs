@@ -14,7 +14,7 @@ public class MFSwitch1 : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //SlimeChildrenÅió™:SCÅj
-        if (collision.gameObject.tag == "SC")
+        if (collision.gameObject.tag == "Player")
         {
            // Isitubute.SetActive(false);
             Isitubute2.SetActive(false);
