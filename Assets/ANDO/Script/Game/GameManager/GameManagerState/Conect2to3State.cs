@@ -16,6 +16,9 @@ public class Conect2to3State : State<GameManager>
         owner.SetCrrentCheckPoint(3);
 
         fin_stage_collide = GameObject.Find("Stage3StartCollide").GetComponent<CollideJudger>();
+
+        ServiceLocator<ISoundService>.Instance.Play("BGM_¢ŠE‚Ì‘I‘ğ", true);
+
     }
 
 

@@ -23,17 +23,7 @@ public class FinStage1State : State<GameManager>
 
         //スコアを格納
         //残り時間を取得
-        var limit = owner.currentGameLimitTime;
-        int basicScore = 100;
-        int score = (int)limit * basicScore;
-        owner.gameScore[owner.stageNum-1] = score; 
-        owner.currentScore = score;
-        int s = 0;
-        foreach(int i in owner.gameScore)
-        {
-            s += i;
-        }
-        owner.totalScore = s;
+        owner.SetScore();
 
         m_time_line = GameObject.Find("Stage1EndEvent").GetComponent<PlayableDirector>();
         m_time_lineScore = GameObject.Find("ScoreEvent").GetComponent<PlayableDirector>();

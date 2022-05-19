@@ -8791,6 +8791,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2ed656b36ca06bd4696c830604dcda9f, type: 3}
   - {fileID: 8300000, guid: eba85f3cf2c980841917020c2b1ef570, type: 3}
   - {fileID: 8300000, guid: 0408b66aa045bb84f84d6697f23cb171, type: 3}
+  - {fileID: 8300000, guid: 32e340226cc47f140a38802a977c2fde, type: 3}
   randomizePitch: 1
   pitchRange: 0.1
 --- !u!114 &1181796285543209293
@@ -11664,7 +11665,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181796285939841866}
   m_LocalRotation: {x: 0.2457933, y: 0.034646343, z: -0.008791333, w: 0.96866304}
-  m_LocalPosition: {x: 3.0487814, y: 8.99, z: 32.494335}
+  m_LocalPosition: {x: 3.0487812, y: 8.99, z: 32.494335}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1181796286097598614}

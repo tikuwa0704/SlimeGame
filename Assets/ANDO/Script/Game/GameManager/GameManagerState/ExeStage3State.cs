@@ -14,13 +14,25 @@ public class ExeStage3State : State<GameManager>
 
     public override void Enter()
     {
-        ServiceLocator<ISoundService>.Instance.Play("BGM_TEST", true);
+        //ServiceLocator<ISoundService>.Instance.FadeOut("BGM_創造する者", 1);
+
+        //ServiceLocator<ISoundService>.Instance.Play("BGM_攻城戦", true);
+
 
         fin_stage_collide = GameObject.Find("Stage3EndCollide").GetComponent<CollideJudger>();
 
         SlimeManager.Instance.StopPause();
 
         Debug.Log("3実行");
+
+        GameObject tutorial;
+
+        if (tutorial = ServiceLocator<IUIService>.Instance.GetUIObject("チュートリアルテキストエリア"))
+        {
+
+            tutorial.GetComponent<TutorialManager>().SetTask(owner.stageNum - 1);
+
+        }
     }
 
     public override void Execute()

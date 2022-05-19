@@ -77,21 +77,24 @@ public class NormalState : State<SlimeManager>
     {
         if (!owner.isActive) return;
 
-        //もしY軸の移動速度が0以上なら落下している
-        var y_power = owner.rigidBody.velocity.y;
-        owner.m_is_falling = (y_power < 0) ? true : false;
+        ////もしY軸の移動速度が0以上なら落下している
+        //var y_power = owner.rigidBody.velocity.y;
+        //owner.m_is_falling = (y_power < 0) ? true : false;
 
-        //落下中ではない状態で地面に接すると再びジャンプフラグがONになる
-        if (!owner.m_is_falling && owner.m_is_ground) owner.m_is_jump = false;
+        ////落下中ではない状態で地面に接すると再びジャンプフラグがONになる
+        //if (!owner.m_is_falling && owner.m_is_ground) owner.m_is_jump = false;
 
-        if (owner.m_is_jump) return;//ジャンプしているなら帰る
+        //if (owner.m_is_jump) return;//ジャンプしているなら帰る
+
+        if (owner.jumpCount >= owner.jumpCountMax) return;
 
         if (Input.GetKeyDown("space"))
         {
             Debug.Log("ジャンプしています");
             owner.m_is_jump = true;
             owner.m_is_ground = false;//isGroundをfalseにする
-            owner.rigidBody.AddForce(new Vector3(0, owner.upForce, 0)); //上に向かって力を加える
+            owner.rigidBody.AddForce(new Vector3(0, owner.upForce, 0),ForceMode.Impulse); //上に向かって力を加える
+            owner.jumpCount++;
         }
 
     }
@@ -108,7 +111,7 @@ public class NormalState : State<SlimeManager>
     void ThrowSlime()
     {
         if (!owner.isActive) return;
-        if (owner.m_is_jump) return;
+        
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {

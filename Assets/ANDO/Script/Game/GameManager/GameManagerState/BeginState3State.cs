@@ -13,6 +13,10 @@ public class BeginState3State : State<GameManager>
 
     public override void Enter()
     {
+        ServiceLocator<ISoundService>.Instance.FadeOut("BGM_世界の選択",1);
+
+        ServiceLocator<ISoundService>.Instance.Play("BGM_創造する者", true);
+
         //現在のステージ設定
         owner.stageNum = 3;
 

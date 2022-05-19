@@ -14,17 +14,14 @@ public class ExeStage1State : State<GameManager>
 
     public override void Enter()
     {
-        
+        //ステージ１の音楽
         ServiceLocator<ISoundService>.Instance.Play("BGM_みんなであそぼう",true);
-
+        //チュートリアル説明テキストを有効に
         ServiceLocator<IUIService>.Instance.SetUIActive("チュートリアルテキストエリア", true);
-
+        //ゴールのコライダー有効にする
         fin_stage_collide = GameObject.Find("Stage1FinCollide").GetComponent<CollideJudger>();
-
         //スライムを動けないようにする
         SlimeManager.Instance.StopPause();
-
-        
     }
 
     public override void Execute()
@@ -35,6 +32,7 @@ public class ExeStage1State : State<GameManager>
         {
             //終わりです
             Debug.Log("制限時間終了");
+            owner.ChangeState(E_GAME_MANAGER_STATE.GameOver);
         }
 
         if (!fin_stage_collide) return;

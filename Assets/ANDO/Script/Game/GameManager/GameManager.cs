@@ -37,6 +37,7 @@ public enum E_GAME_MANAGER_STATE
     BEGIN_STAGE3,//ステージ3開始ムービー
     EXE_STAGE3,//ステージ3挑戦中
     FIN_STAGE3,//ステージ3の終了
+    GameOver,//ゲームの終了
 }
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE> , IGameService
@@ -64,6 +65,14 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
     [SerializeField]
     [Tooltip("スライムコア")]
     private GameObject m_slime;
+
+    [SerializeField]
+    [Tooltip("基本スコア点")]
+    public int basicLimitTimeScore = 10;
+
+    [SerializeField]
+    [Tooltip("基本スコア点")]
+    public int basicSlimeNumScore = 50;
 
     [SerializeField]
     [Tooltip("全ステージ合計のスコア")]
@@ -102,7 +111,8 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         stateList.Add(new Conect2to3State(this));
         stateList.Add(new BeginState3State(this));
         stateList.Add(new ExeStage3State(this));
-        //stateList.Add(new FinStage3State(this));
+        stateList.Add(new FinStage3State(this));
+        stateList.Add(new GameOverState(this));
 
         stateMachine = new StateMachine<GameManager>();
 
@@ -139,7 +149,8 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         //子スライムを生成する氷状態では生成しない
 
         slimeManager.ChangeState(E_SLIMES_STATE.E_NORMAL);
-        slimeManager.GenerateSlime(100);
+        int num = slimeManager.GetSlimeNum();
+        slimeManager.GenerateSlime(num);
     }
 
     public float GetLimitTime()
@@ -155,6 +166,24 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
     public int GetTotalScore()
     {
         return totalScore;
+    }
+
+    public void SetScore()
+    {
+        //スコアを格納
+        //残り時間を取得
+        var limit = currentGameLimitTime;
+        var num = SlimeManager.Instance.GetSlimeNum();
+        //int basicScore = 100;
+        int score = (int)(limit * basicLimitTimeScore + num * basicSlimeNumScore);
+        gameScore[stageNum - 1] = score;
+        currentScore = score;
+        int s = 0;
+        foreach (int i in gameScore)
+        {
+            s += i;
+        }
+        totalScore = s;
     }
 
 }

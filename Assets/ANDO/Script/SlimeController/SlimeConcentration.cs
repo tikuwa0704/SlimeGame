@@ -32,8 +32,7 @@ public class SlimeConcentration : MonoBehaviour
 	void SlimeTogetherLeave(GameObject obj)
 	{
 		if (SlimeManager.Instance.IsCurrentState(E_SLIMES_STATE.E_ICE)) return;
-		//if (GetComponent<SlimeCoreController>().m_state == SlimeCoreController.SLIME_CORE_STATE.COLD) return;
-
+		
 
 		Transform children = obj.GetComponentInChildren<Transform>();
 		//éqóvëfÇ™Ç¢Ç»ÇØÇÍÇŒèIóπ
