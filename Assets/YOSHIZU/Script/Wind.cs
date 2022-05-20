@@ -14,7 +14,7 @@ public class Wind : MonoBehaviour
     //Z²•ûŒü‚Ì‰Á‚¦‚é•—‚Ì—Í
     public float WindZ = 0f;
     */
-    public float pawer = 0f;
+    public float power = 0f;
     /// <summary>
     /// ƒgƒŠƒK[‚Ì”ÍˆÍ‚É“ü‚Á‚Ä‚¢‚éŠÔ‚¸‚Á‚ÆÀs‚³‚ê‚é
     /// </summary>
@@ -29,7 +29,7 @@ public class Wind : MonoBehaviour
             if (OtherRigidbody != null)
             {
                 // ‘Šè‚Ìrigidbody‚É—Í‚ğ‰Á‚¦‚é
-                OtherRigidbody.AddForce(this.transform.right * pawer, ForceMode.Force);
+                OtherRigidbody.AddForce(this.transform.forward * power * Time.deltaTime, ForceMode.Force);
             }
         }
       
