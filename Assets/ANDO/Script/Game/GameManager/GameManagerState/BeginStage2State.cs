@@ -33,7 +33,7 @@ public class BeginStage2State : State<GameManager>
 
     public override void Execute()
     {
-        if(m_time_line.time >= 15.0f)
+        if(m_time_line.time >= 13.0f)
         {
 
             owner.ChangeState(E_GAME_MANAGER_STATE.READY_STAGE1);
