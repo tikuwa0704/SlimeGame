@@ -37,7 +37,8 @@ public enum E_GAME_MANAGER_STATE
     BEGIN_STAGE3,//ステージ3開始ムービー
     EXE_STAGE3,//ステージ3挑戦中
     FIN_STAGE3,//ステージ3の終了
-    GameOver,//ゲームの終了
+    GAMEOVER,//ゲームの終了
+    GAMECLEAR,//ゲームクリア
 }
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE> , IGameService
@@ -113,6 +114,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         stateList.Add(new ExeStage3State(this));
         stateList.Add(new FinStage3State(this));
         stateList.Add(new GameOverState(this));
+        stateList.Add(new GameClearState(this));
 
         stateMachine = new StateMachine<GameManager>();
 

@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MORI/mori2.unity
-    guid: ab4763f6d26b5274f99e6b238463b72a
-  - enabled: 1
     path: Assets/ANDO/Scenes/OpeningScene.unity
     guid: 51084903d9650d7428dcb554866ca96b
   - enabled: 1

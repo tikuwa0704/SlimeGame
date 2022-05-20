@@ -22,7 +22,7 @@ public class ExeStage2State : State<GameManager>
 
         GameObject tutorial;
 
-        if(tutorial = ServiceLocator<IUIService>.Instance.GetUIObject("チュートリアルテキストエリア")){
+        if(tutorial = ServiceLocator<IUIService>.Instance.GetUIObject("チュートリアル")){
 
             tutorial.GetComponent<TutorialManager>().SetTask(owner.stageNum - 1);
 
@@ -33,10 +33,11 @@ public class ExeStage2State : State<GameManager>
     {
         owner.currentGameLimitTime -= Time.deltaTime;
 
-        if (owner.currentGameLimitTime <= 0)
+        if (owner.currentGameLimitTime <= 0 || SlimeManager.Instance.GetSlimeNum() <= 0)
         {
             //終わりです
             Debug.Log("制限時間終了");
+            owner.ChangeState(E_GAME_MANAGER_STATE.GAMEOVER);
         }
 
         if (!fin_stage_collide) return;

@@ -17,7 +17,7 @@ public class ExeStage1State : State<GameManager>
         //ステージ１の音楽
         ServiceLocator<ISoundService>.Instance.Play("BGM_みんなであそぼう",true);
         //チュートリアル説明テキストを有効に
-        ServiceLocator<IUIService>.Instance.SetUIActive("チュートリアルテキストエリア", true);
+        ServiceLocator<IUIService>.Instance.SetUIActive("チュートリアル", true);
         //ゴールのコライダー有効にする
         fin_stage_collide = GameObject.Find("Stage1FinCollide").GetComponent<CollideJudger>();
         //スライムを動けないようにする
@@ -28,11 +28,11 @@ public class ExeStage1State : State<GameManager>
     {
         owner.currentGameLimitTime -= Time.deltaTime;
 
-        if (owner.currentGameLimitTime <= 0)
+        if (owner.currentGameLimitTime <= 0||SlimeManager.Instance.GetSlimeNum()<=0)
         {
             //終わりです
             Debug.Log("制限時間終了");
-            owner.ChangeState(E_GAME_MANAGER_STATE.GameOver);
+            owner.ChangeState(E_GAME_MANAGER_STATE.GAMEOVER);
         }
 
         if (!fin_stage_collide) return;

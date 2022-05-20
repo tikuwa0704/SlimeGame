@@ -53,6 +53,7 @@ public class GameOverUI : MonoBehaviour
                     ServiceLocator<ISoundService>.Instance.Play("SE_ï∂éöè’åÇ");
                 }
             }
+            
         }
         else
         {

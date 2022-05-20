@@ -19,6 +19,10 @@ public class GameInfoRender : MonoBehaviour
     Text crrentTotalScoreText;
 
     [SerializeField]
+    [Tooltip("ターゲットスライムの数")]
+    float targetSlimeNum;
+
+    [SerializeField]
     [Tooltip("ターゲットスコア")]
     float targetTotalScore;
 

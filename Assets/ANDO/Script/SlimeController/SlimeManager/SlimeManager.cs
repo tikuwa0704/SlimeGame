@@ -173,7 +173,8 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
 
     public void GenerateSlime(Vector3 point)
     {
-
+        //100体以上は作らない
+        if (GetSlimeNum() >= 100) return;
         //親スライムの地点
         Vector3 parentPosition = transform.position;
 
