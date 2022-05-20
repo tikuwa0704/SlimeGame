@@ -17,10 +17,10 @@ public class ReadyStage1State : State<GameManager>
     public override void Enter()
     {
         
-        start_text = ServiceLocator<IUIService>.Instance.GetUIObject("ステージスタートテキストエリア");
+        start_text = ServiceLocator<IUIService>.Instance.GetUIObject("ステージスタート");
         start_text.GetComponent<Text>().enabled = true;
 
-        ServiceLocator<IUIService>.Instance.SetUIActive("ステージスタートテキストエリア", true);
+        ServiceLocator<IUIService>.Instance.SetUIActive("ステージスタート", true);
         
         ServiceLocator<ISoundService>.Instance.Play("SE_カウントダウン");
 

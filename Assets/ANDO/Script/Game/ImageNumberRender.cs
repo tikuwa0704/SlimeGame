@@ -84,7 +84,7 @@ public class ImageNumberRender : MonoBehaviour
                 Image img = obj.AddComponent<Image>();
                 RectTransform rect = obj.GetComponent<RectTransform>();
                 rect.sizeDelta = new Vector2(width, height);
-                //obj.transform.DOScale(1.1f, 2.0f).SetEase(Ease.OutElastic);
+               
 
                 //•\¦‚·‚é”’l‚Ìw’è
                 NumSprite[i].GetComponent<Image>().sprite = Sprite_Dictionary[strValue[i].ToString()];

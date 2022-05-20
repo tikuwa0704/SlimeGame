@@ -32,7 +32,7 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         // チュートリアル表示用UIのインスタンス取得
-        tutorialTextArea = GameObject.Find("TutorialTextArea").GetComponent<RectTransform>();
+        tutorialTextArea = GameObject.Find("TutorialUI").GetComponent<RectTransform>();
         TutorialTitle = tutorialTextArea.Find("Title").GetComponent<Text>();
         TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<Text>();
 
