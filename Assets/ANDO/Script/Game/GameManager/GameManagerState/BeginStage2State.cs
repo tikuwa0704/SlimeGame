@@ -28,6 +28,9 @@ public class BeginStage2State : State<GameManager>
 
         owner.m_mainCamera.SetActive(false);
         owner.m_subCamera.SetActive(true);
+
+        owner.ActiveChange(owner.stageNum-1, false);
+        owner.ActiveChange(owner.stageNum, true);
     }
 
 

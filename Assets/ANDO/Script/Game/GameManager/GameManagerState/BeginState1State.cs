@@ -43,6 +43,9 @@ public class BeginState1State : State<GameManager>
         //BGM再生
         ServiceLocator<ISoundService>.Instance.Play("BGM_リコーダーマーチ");
 
+        owner.ActiveChange(owner.stageNum,true);
+        owner.ActiveChange(owner.stageNum+1, false);
+        owner.ActiveChange(owner.stageNum+2, false);
     }
 
     public override void Execute()

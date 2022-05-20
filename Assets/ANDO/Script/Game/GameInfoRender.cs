@@ -27,6 +27,10 @@ public class GameInfoRender : MonoBehaviour
     float targetTotalScore;
 
     [SerializeField]
+    [Tooltip("最終の表示スコア")]
+    Text finalTotalScore;
+
+    [SerializeField]
     [Tooltip("現在合計のスコアの数値")]
     float currentTotalScore;
 
@@ -106,5 +110,7 @@ public class GameInfoRender : MonoBehaviour
     public void SetTargetScore()
     {
         targetTotalScore = ServiceLocator<IGameService>.Instance.GetTotalScore();
+
+        finalTotalScore.text = targetTotalScore.ToString("F0");
     }
 }

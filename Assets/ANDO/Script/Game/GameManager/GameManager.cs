@@ -43,7 +43,15 @@ public enum E_GAME_MANAGER_STATE
 
 public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE> , IGameService
 {
-  
+    [SerializeField]
+    GameObjects[] gimmicks;
+
+    [System.Serializable]
+    public class GameObjects
+    {
+        public GameObject[] Array;
+    }
+
     [SerializeField]
     [Tooltip("現在のステージ番号")]
     public int stageNum;
@@ -188,5 +196,15 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         totalScore = s;
     }
 
+    public void ActiveChange(int stageNum,bool isActive)
+    {
+        GameObject[] i = gimmicks[stageNum - 1].Array;
+        foreach(GameObject obj in i)
+        {
+            obj.SetActive(isActive);
+        }
+
+
+    }
 }
 

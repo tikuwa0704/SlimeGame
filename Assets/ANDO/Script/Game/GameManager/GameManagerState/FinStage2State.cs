@@ -42,7 +42,7 @@ public class FinStage2State : State<GameManager>
     public override void Execute()
     {
 
-        if (m_time_line.time >= 13)
+        if (m_time_line.time >= 12)
         {
             owner.ChangeState(E_GAME_MANAGER_STATE.CONECT_2TO3);
 
