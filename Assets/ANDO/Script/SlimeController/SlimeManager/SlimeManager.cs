@@ -100,17 +100,41 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (IsCurrentState(E_SLIMES_STATE.E_NORMAL))
+        {
+            for(int i = 0; i < collision.contacts.Length; i++)
+            {
+               
+                // è’ìÀà íuÇéÊìæÇ∑ÇÈ
+                Vector3 hitPos = collision.contacts[i].point;
+
+            Vector3 dir = hitPos - this.transform.position;
+                Debug.Log(i+"î‘ñ⁄Ç≈Ç∑Å@"+dir.y);
+                if (dir.y <= 0)
+            {
+                jumpCount = 0;
+                //jumpCount = 0;
+                //m_is_ground = true; //isGroundÇtrueÇ…Ç∑ÇÈ
+                GetComponent<SlimeAudio>().PlayFootstepSE();
+            }
+
+            }
+            
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
         // è’ìÀà íuÇéÊìæÇ∑ÇÈ
         Vector3 hitPos = collision.contacts[0].point;
 
         Vector3 dir = hitPos - this.transform.position;
-        if (dir.y<0)
+        //Debug.Log(dir.y);
+        if (dir.y <= -0.25)
         {
-            jumpCount = 0;
-            //m_is_ground = true; //isGroundÇtrueÇ…Ç∑ÇÈ
-            GetComponent<SlimeAudio>().PlayFootstepSE();
+            //jumpCount = 0;
+            
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
