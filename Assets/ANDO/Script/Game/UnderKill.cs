@@ -15,6 +15,11 @@ public class UnderKill : MonoBehaviour
             ServiceLocator<IGameService>.Instance.CheckPoint();
             
         }
+        if (other.CompareTag("SC"))
+        {
+
+            Destroy(other.gameObject);
+        }
         if (other.CompareTag("Syougaibutu"))
         {
 
