@@ -327,5 +327,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6072a3488ca56c84895212f31a60f7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: 0.01
+  up: 0.1
   col: 0
