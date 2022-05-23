@@ -16,6 +16,9 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
     public static SlimeManager Instance { get; private set; }
 
     [SerializeField]
+    [Tooltip("アイススライムプレハブ")]
+    public GameObject icePrefab;
+    [SerializeField]
     [Tooltip("子スライムのプレハブ")]
     GameObject childSlimePrefab;
     [Tooltip("リジッドボディ")]
@@ -49,6 +52,11 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
 
         ChangeState(E_SLIMES_STATE.E_NORMAL);
 
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
     [SerializeField]
@@ -110,7 +118,7 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
 
             Vector3 dir = hitPos - this.transform.position;
                 Debug.Log(i+"番目です　"+dir.y);
-                if (dir.y <= 0)
+                if (dir.y <= -0.25)
             {
                 jumpCount = 0;
                 //jumpCount = 0;

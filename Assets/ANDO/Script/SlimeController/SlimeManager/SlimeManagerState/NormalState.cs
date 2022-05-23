@@ -34,7 +34,7 @@ public class NormalState : State<SlimeManager>
 
     public override void Execute()
     {
-        
+        Debug.Log(Time.deltaTime);
         Move();
         Jump();
         ThrowSlime();
@@ -88,7 +88,7 @@ public class NormalState : State<SlimeManager>
 
         if (owner.jumpCount >= owner.jumpCountMax) return;
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetButton("Fire1"))
         {
             Debug.Log("ƒWƒƒƒ“ƒv‚µ‚Ä‚¢‚Ü‚·");
             owner.m_is_jump = true;
@@ -113,7 +113,7 @@ public class NormalState : State<SlimeManager>
         if (!owner.isActive) return;
         
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetButton("Fire3"))
         {
             owner.ThrowSlimeNear(300);
 
