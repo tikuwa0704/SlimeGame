@@ -8,6 +8,7 @@ public class IceState : State<SlimeManager>
 {
     public IceState(SlimeManager owner): base(owner) { }
 
+    
 
     public override void Enter()
     {
@@ -30,6 +31,18 @@ public class IceState : State<SlimeManager>
 
         {
             owner.rigidBody.constraints = RigidbodyConstraints.None;
+
+            owner.GetComponent<MeshRenderer>().enabled = false;
+
+            GameObject ice = GameObject.Instantiate(owner.icePrefab, owner.transform);
+                
+            foreach(Transform dummy in ice.transform)
+            {
+                dummy.SetParent(owner.transform);
+                dummy.GetComponent<MeshCollider>().enabled = false;
+            }
+            owner.gameObject.AddComponent<Hakai>();
+            //GameObject.Instantiate(owner.icePrefab, owner.transform);
 
             //ƒ}ƒeƒŠƒAƒ‹‚ð•X‚É
             owner.GetComponent<MeshRenderer>().material = owner._material[(int)E_SLIMES_STATE.E_ICE];

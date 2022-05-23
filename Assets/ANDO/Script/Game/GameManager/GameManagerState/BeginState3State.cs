@@ -58,7 +58,7 @@ public class BeginState3State : State<GameManager>
 
         }
 
-        if (TimeLine.time < 9 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (TimeLine.time < 9 && Input.GetButton("Fire1"))
         {
             TimeLine.time = 9;
         }

@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/YOSHIZU/png画像/Stage.meta
+guid: f5e55156c3e8cde47b33ee9c30c59754
+folderAsset: yes
+DefaultImporter:
+========
 guid: 423832683835f5d40bd014bb3747a5cf
 PrefabImporter:
+>>>>>>>> f9ee94f1e8dda38fcab133e1cefae40c4bba654e:Assets/ANDO/Prefabs/炎.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

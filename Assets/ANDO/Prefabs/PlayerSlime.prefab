@@ -2515,7 +2515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181796284466434581}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -10}
+  m_LocalPosition: {x: 0, y: 0.5, z: -5.8199997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1181796285138109263}
@@ -8806,6 +8806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ac910c95f6e974b8dce3d224e28116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icePrefab: {fileID: 0}
   childSlimePrefab: {fileID: 3050193967150305962, guid: 7efa0b3643809b84a8bd61b98204a59d, type: 3}
   rigidBody: {fileID: 0}
   childrenSlimeParent: {fileID: 1181796285841369902}
@@ -8819,6 +8820,8 @@ MonoBehaviour:
   upForce: 400
   m_is_ground: 0
   m_is_jump: 0
+  jumpCountMax: 1
+  jumpCount: 0
   m_is_falling: 0
   cold_effect: {fileID: 2137257561600686411, guid: 311d07aa8d2ad5546a55b953e636d966, type: 3}
   _material:
@@ -11665,7 +11668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181796285939841866}
   m_LocalRotation: {x: 0.2457933, y: 0.034646343, z: -0.008791333, w: 0.96866304}
-  m_LocalPosition: {x: 3.0487812, y: 8.99, z: 32.494335}
+  m_LocalPosition: {x: 3.0487814, y: 8.99, z: 32.494335}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1181796286097598614}

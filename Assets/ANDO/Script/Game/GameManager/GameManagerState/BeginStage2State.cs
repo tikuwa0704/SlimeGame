@@ -41,6 +41,11 @@ public class BeginStage2State : State<GameManager>
 
             owner.ChangeState(E_GAME_MANAGER_STATE.READY_STAGE1);
         }
+
+        if (m_time_line.time < 12.0f&&Input.GetButton("Fire1"))
+        {
+            m_time_line.time = 12.0f;
+        }
     }
 
     public override void Exit()
