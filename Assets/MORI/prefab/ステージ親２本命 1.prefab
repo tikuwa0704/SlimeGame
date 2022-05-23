@@ -14601,8 +14601,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2835674, y: 14.32315, z: 230.82262}
-  m_Center: {x: 0.6417837, y: 6.661575, z: 94.667534}
+  m_Size: {x: 2.2835674, y: 14.32315, z: 232.0718}
+  m_Center: {x: 0.6417837, y: 6.661575, z: 95.29212}
 --- !u!1 &4861517720446375004
 GameObject:
   m_ObjectHideFlags: 0
@@ -40532,8 +40532,10 @@ MonoBehaviour:
   m_Mesh: {fileID: 0}
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedEdges:
+  - a: 50
+    b: 48
+  m_SelectedVertices: 3200000030000000
 --- !u!23 &7907870283900892268
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85871,8 +85873,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.283567, y: 14.323151, z: 230.10425}
-  m_Center: {x: 0.6417837, y: 6.6615753, z: 95.02667}
+  m_Size: {x: 2.283567, y: 14.323151, z: 232.0718}
+  m_Center: {x: 0.6417837, y: 6.6615753, z: 95.29212}
 --- !u!1001 &247091083424214327
 PrefabInstance:
   m_ObjectHideFlags: 0
