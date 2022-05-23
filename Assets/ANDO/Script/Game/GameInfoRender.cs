@@ -112,5 +112,7 @@ public class GameInfoRender : MonoBehaviour
         targetTotalScore = ServiceLocator<IGameService>.Instance.GetTotalScore();
 
         finalTotalScore.text = targetTotalScore.ToString("F0");
+
+       
     }
 }

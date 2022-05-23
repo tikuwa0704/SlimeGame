@@ -23,7 +23,42 @@ public class IceState : State<SlimeManager>
 
     public override void Exit()
     {
-        
+        {
+            
+            owner.GetComponent<MeshRenderer>().enabled = true;
+
+            owner.gameObject.GetComponent<Hakai>().enabled = false;
+
+            //マテリアルを氷に
+            owner.GetComponent<MeshRenderer>().material = owner._material[(int)E_SLIMES_STATE.E_NORMAL];
+
+            owner.GetComponent<SphereCollider>().material = owner._physicMaterial[(int)E_SLIMES_STATE.E_NORMAL];
+
+         
+
+            owner.target_scale = new Vector3(1, 1, 1);
+
+      
+
+            owner.GetComponent<SphereCollider>().radius = 0.5f;
+
+            int i = 0;
+            foreach (Transform k in owner.transform)
+            {
+                if (k.CompareTag("Effect")) continue;
+                k.gameObject.AddComponent<Rigidbody>();
+                k.transform.parent = null;
+                k.gameObject.AddComponent<HakaiTime>();
+                k.gameObject.GetComponent<MeshCollider>().enabled = true;
+                /*
+                float Dtime = Random.Range(1.0f, 3.0f);
+                Destroy(k.gameObject, Dtime);
+                */
+                i++;
+            }
+
+            Debug.Log(i);
+        }
     }
 
     void InitIce(GameObject obj)
@@ -38,11 +73,14 @@ public class IceState : State<SlimeManager>
                 
             foreach(Transform dummy in ice.transform)
             {
+                if (dummy.CompareTag("Effect")) continue;
                 dummy.SetParent(owner.transform);
                 dummy.GetComponent<MeshCollider>().enabled = false;
             }
-            owner.gameObject.AddComponent<Hakai>();
-            //GameObject.Instantiate(owner.icePrefab, owner.transform);
+            owner.gameObject.GetComponent<Hakai>().enabled =true;
+
+            GameObject.Destroy(ice);
+            
 
             //マテリアルを氷に
             owner.GetComponent<MeshRenderer>().material = owner._material[(int)E_SLIMES_STATE.E_ICE];
@@ -53,12 +91,21 @@ public class IceState : State<SlimeManager>
             int slime_num = Mathf.Max(1, owner.GetComponent<SlimeConcentration>().m_stick_num);
 
             //最大値
-            float scale_max = 3.0f;
+            float scale_max = 2.0f;
+            float scale_min = 1.0f;
             float per = slime_num / 100f;
 
-            owner.target_scale = new Vector3(per, per, per) * scale_max;
+            float scale = Mathf.Max(scale_min,per * scale_max);
+
+            owner.target_scale = new Vector3(scale, scale, scale);
 
             owner.t = 0.0f;
+
+            float radius_max = 1.0f;
+            float radius_min = 0.5f;
+            float radius = Mathf.Max(radius_min, per * radius_max);
+
+            owner.GetComponent<SphereCollider>().radius = radius;
 
             GameObject effect = GameObject.Instantiate(owner.cold_effect, owner.transform);
             GameObject.Destroy(effect, 3.0f);

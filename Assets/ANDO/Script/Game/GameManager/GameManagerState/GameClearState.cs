@@ -29,11 +29,7 @@ public class GameClearState : State<GameManager>
     public override void Execute()
     {
 
-        if (m_time_line.time >= 13)
-        {
-            ServiceLocator<IUIService>.Instance.SetUIActive("シーンチェンジ", true);
-
-        }
+       
     }
 
     public override void Exit()

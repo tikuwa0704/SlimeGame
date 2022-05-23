@@ -15,6 +15,7 @@ TagManager:
   - KillZone
   - Fire
   - TENJOU
+  - Effect
   layers:
   - Default
   - TransparentFX

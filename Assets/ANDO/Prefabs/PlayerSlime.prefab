@@ -8564,6 +8564,7 @@ GameObject:
   - component: {fileID: 4592310980258549302}
   - component: {fileID: 4592310980258549297}
   - component: {fileID: 1181796285543209293}
+  - component: {fileID: 7936940229057564613}
   m_Layer: 3
   m_Name: SlimeCore
   m_TagString: Player
@@ -8832,6 +8833,18 @@ MonoBehaviour:
   - {fileID: 13400000, guid: 45b87a7131e089b4a96a4d8799c0f12c, type: 2}
   - {fileID: 13400000, guid: c7e0c729290020644bcf32d8450a8e6d, type: 2}
   t: 0
+--- !u!114 &7936940229057564613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181796285543209295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0a57efad7604a45923cb205b57bdd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1181796285550062743
 GameObject:
   m_ObjectHideFlags: 0
@@ -11668,7 +11681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181796285939841866}
   m_LocalRotation: {x: 0.2457933, y: 0.034646343, z: -0.008791333, w: 0.96866304}
-  m_LocalPosition: {x: 3.0487814, y: 8.99, z: 32.494335}
+  m_LocalPosition: {x: 3.0487812, y: 8.99, z: 32.494335}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1181796286097598614}

@@ -15,6 +15,18 @@ public class NormalState : State<SlimeManager>
 
     public override void Enter()
     {
+        foreach (Transform k in owner.transform)
+        {
+            if (k.gameObject.CompareTag("Effect")) continue;
+            k.gameObject.AddComponent<Rigidbody>();
+            k.transform.parent = null;
+            k.gameObject.AddComponent<HakaiTime>();
+            k.gameObject.GetComponent<MeshCollider>().enabled = true;
+            /*
+            float Dtime = Random.Range(1.0f, 3.0f);
+            Destroy(k.gameObject, Dtime);
+            */
+        }
 
         owner.GetComponent<MeshRenderer>().material = owner._material[(int)E_SLIMES_STATE.E_NORMAL];
 
@@ -34,7 +46,7 @@ public class NormalState : State<SlimeManager>
 
     public override void Execute()
     {
-        Debug.Log(Time.deltaTime);
+       
         Move();
         Jump();
         ThrowSlime();
@@ -88,7 +100,7 @@ public class NormalState : State<SlimeManager>
 
         if (owner.jumpCount >= owner.jumpCountMax) return;
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Jump"))
         {
             Debug.Log("ƒWƒƒƒ“ƒv‚µ‚Ä‚¢‚Ü‚·");
             owner.m_is_jump = true;
@@ -113,7 +125,7 @@ public class NormalState : State<SlimeManager>
         if (!owner.isActive) return;
         
 
-        if (Input.GetButton("Fire3"))
+        if (Input.GetButtonDown("Fire2"))
         {
             owner.ThrowSlimeNear(300);
 

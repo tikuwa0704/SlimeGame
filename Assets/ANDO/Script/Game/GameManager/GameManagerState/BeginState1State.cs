@@ -56,7 +56,7 @@ public class BeginState1State : State<GameManager>
             owner.ChangeState(E_GAME_MANAGER_STATE.READY_STAGE1);
         }
         //クリックでイベントスキップ
-        if (timeLine.time < 9 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (timeLine.time < 9 && Input.GetButton("Fire1"))
         {
             timeLine.time = 9;
         }
