@@ -110,21 +110,21 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
     {
         if (IsCurrentState(E_SLIMES_STATE.E_NORMAL))
         {
-            for(int i = 0; i < collision.contacts.Length; i++)
+            for (int i = 0; i < collision.contacts.Length; i++)
             {
-               
+
                 // Õ“ËˆÊ’u‚ðŽæ“¾‚·‚é
                 Vector3 hitPos = collision.contacts[i].point;
 
-            Vector3 dir = hitPos - this.transform.position;
-                Debug.Log(i+"”Ô–Ú‚Å‚·@"+dir.y);
+                Vector3 dir = hitPos - this.transform.position;
+
                 if (dir.y <= -0.25)
-            {
-                jumpCount = 0;
-                //jumpCount = 0;
-                //m_is_ground = true; //isGround‚ðtrue‚É‚·‚é
-                GetComponent<SlimeAudio>().PlayFootstepSE();
-            }
+                {
+                    jumpCount = 0;
+                    //jumpCount = 0;
+                    //m_is_ground = true; //isGround‚ðtrue‚É‚·‚é
+                    GetComponent<SlimeAudio>().PlayFootstepSE();
+                }
 
             }
             
