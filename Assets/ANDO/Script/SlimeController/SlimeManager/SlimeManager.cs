@@ -129,6 +129,10 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
             }
             
         }
+        if (IsCurrentState(E_SLIMES_STATE.E_ICE))
+        {
+           GetComponent<IceAudio>().PlayFootstepSE();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
