@@ -102,7 +102,7 @@ public class NormalState : State<SlimeManager>
 
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("ƒWƒƒƒ“ƒv‚µ‚Ä‚¢‚Ü‚·");
+            
             owner.m_is_jump = true;
             owner.m_is_ground = false;//isGround‚ğfalse‚É‚·‚é
             owner.rigidBody.AddForce(new Vector3(0, owner.upForce, 0),ForceMode.Impulse); //ã‚ÉŒü‚©‚Á‚Ä—Í‚ğ‰Á‚¦‚é

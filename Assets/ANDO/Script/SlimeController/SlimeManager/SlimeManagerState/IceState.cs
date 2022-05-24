@@ -29,35 +29,39 @@ public class IceState : State<SlimeManager>
 
             owner.gameObject.GetComponent<Hakai>().enabled = false;
 
-            //マテリアルを氷に
+            //マテリアルを戻す
             owner.GetComponent<MeshRenderer>().material = owner._material[(int)E_SLIMES_STATE.E_NORMAL];
 
-            owner.GetComponent<SphereCollider>().material = owner._physicMaterial[(int)E_SLIMES_STATE.E_NORMAL];
-
-         
+            owner.GetComponent<SphereCollider>().material = owner._physicMaterial[(int)E_SLIMES_STATE.E_NORMAL];        
 
             owner.target_scale = new Vector3(1, 1, 1);
 
-      
-
             owner.GetComponent<SphereCollider>().radius = 0.5f;
 
-            int i = 0;
-            foreach (Transform k in owner.transform)
+            // 子オブジェクトを返却する配列作成
+            var children = new Transform[owner.transform.childCount];
+
+            // 0～個数-1までの子を順番に配列に格納
+            for (var k = 0; k < children.Length; ++k)
             {
-                if (k.CompareTag("Effect")) continue;
-                k.gameObject.AddComponent<Rigidbody>();
-                k.transform.parent = null;
-                k.gameObject.AddComponent<HakaiTime>();
-                k.gameObject.GetComponent<MeshCollider>().enabled = true;
-                /*
-                float Dtime = Random.Range(1.0f, 3.0f);
-                Destroy(k.gameObject, Dtime);
-                */
-                i++;
+                children[k] = owner.transform.GetChild(k);
             }
 
-            Debug.Log(i);
+            // 0～個数-1までの子を順番に配列に格納
+            for (var j = 0; j < children.Length; ++j)
+            {
+
+                var child = children[j];
+
+                if (child.CompareTag("Ice"))
+                {
+                    child.gameObject.AddComponent<Rigidbody>();
+                    child.transform.parent = null;
+                    child.gameObject.AddComponent<HakaiTime>();
+                    child.gameObject.GetComponent<MeshCollider>().enabled = true;
+                }
+
+            }
         }
     }
 
@@ -73,10 +77,10 @@ public class IceState : State<SlimeManager>
                 
             foreach(Transform dummy in ice.transform)
             {
-                if (dummy.CompareTag("Effect")) continue;
                 dummy.SetParent(owner.transform);
                 dummy.GetComponent<MeshCollider>().enabled = false;
             }
+
             owner.gameObject.GetComponent<Hakai>().enabled =true;
 
             GameObject.Destroy(ice);
