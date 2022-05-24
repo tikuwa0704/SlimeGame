@@ -24,7 +24,9 @@ public class IceState : State<SlimeManager>
     public override void Exit()
     {
         {
-            
+            owner.GetComponent<IceAudio>().PlayIceBreakSE();
+
+
             owner.GetComponent<MeshRenderer>().enabled = true;
 
             owner.gameObject.GetComponent<Hakai>().enabled = false;
@@ -69,6 +71,8 @@ public class IceState : State<SlimeManager>
     {
 
         {
+            owner.GetComponent<IceAudio>().PlayIceSE();
+
             owner.rigidBody.constraints = RigidbodyConstraints.None;
 
             owner.GetComponent<MeshRenderer>().enabled = false;
