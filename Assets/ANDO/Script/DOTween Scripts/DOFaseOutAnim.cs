@@ -19,8 +19,6 @@ public class DOFaseOutAnim : MonoBehaviour
 
     private Image image;
 
-    private CanvasGroup canvasGroup;
-
     private void Start()
     {
         text = GetComponent<Text>();
