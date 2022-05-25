@@ -64,10 +64,10 @@ public class SlimeManager : StatefulObjectBase<SlimeManager,E_SLIMES_STATE>
     public Vector3 velocity;         // 移動方向
     [SerializeField]
     [Tooltip("通常状態の移動速度")]
-    public float m_moveSpeedIdle = 5.0f;   // 移動速度
+    public float m_moveSpeedIdle = 40.0f;   // 移動速度
     [SerializeField]
     [Tooltip("氷状態の移動速度")]
-    public float m_moveSpeedCold = 5.0f;   // 移動速度
+    public float m_moveSpeedCold = 300.0f;   // 移動速度
     [SerializeField]
     [Tooltip("移動ベクトル")]
     public Vector3 m_moveVector = new Vector3(0, 0, 0);   // 移動速度

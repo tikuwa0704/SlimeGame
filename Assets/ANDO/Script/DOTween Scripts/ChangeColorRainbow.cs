@@ -7,9 +7,12 @@ public class ChangeColorRainbow : MonoBehaviour
 {
     Image image;
 
+    Text text;
+
     void Start()
     {
         TryGetComponent(out image);
+        TryGetComponent(out text);
     }
 
     void Update()
@@ -19,6 +22,7 @@ public class ChangeColorRainbow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        image.color = Color.HSVToRGB(Time.time % 1, 1, 1);
+        if(image)image.color = Color.HSVToRGB(Time.time % 1, 1, 1);
+        if (text) text.color = Color.HSVToRGB(Time.time % 1, 1, 1);
     }
 }

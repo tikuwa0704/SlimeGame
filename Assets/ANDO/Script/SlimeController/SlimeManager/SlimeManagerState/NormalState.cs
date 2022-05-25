@@ -26,7 +26,7 @@ public class NormalState : State<SlimeManager>
 
         owner.t = 0.0f;
 
-        moveVector = new Vector3(0, 0, 0);
+        //moveVector = new Vector3(0, 0, 0);
 
         moveMagnitude = 0;
 
