@@ -24,7 +24,7 @@ public class BounceScaleFadeOut : MonoBehaviour
         {
             isFade = true;
 
-            transform.DOScale(0f, 1f);
+            transform.DOScale(0f, fadeTime);
             
         }
 

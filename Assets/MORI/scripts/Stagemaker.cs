@@ -18,7 +18,7 @@ public class Stagemaker : MonoBehaviour
             if (Switch1.GetComponent<WSwitch1>().Switch == true && Switch2.GetComponent<WSwitch1>().Switch == true && ON == false)
             {
                 Stage();
-                ON = true;
+               // ON = true;
             }
         }
         if (version2 == true)
@@ -26,10 +26,13 @@ public class Stagemaker : MonoBehaviour
             if (Switch1.GetComponent<WSwitch1>().Switch == true && Switch2.GetComponent<WSwitch1>().Switch == true && Switch3.GetComponent<WSwitch1>().Switch == true && ON == false)
             {
                 Stage();
-                ON = true;
+                //ON = true;
                 Switch1.GetComponent<WSwitch1>().Switch = false;
                 Switch2.GetComponent<WSwitch1>().Switch = false;
                 Switch3.GetComponent<WSwitch1>().Switch = false;
+                Switch1.GetComponent<WSwitch1>().Color();
+                Switch2.GetComponent<WSwitch1>().Color();
+                Switch3.GetComponent<WSwitch1>().Color();
             }
         }
     }

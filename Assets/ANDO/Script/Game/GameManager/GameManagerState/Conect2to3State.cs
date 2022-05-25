@@ -24,6 +24,11 @@ public class Conect2to3State : State<GameManager>
 
     public override void Execute()
     {
+        if (SlimeManager.Instance.GetSlimeNum() <= 0)
+        {
+            owner.ChangeState(E_GAME_MANAGER_STATE.GAMEOVER);
+        }
+
         if (!fin_stage_collide) return;
 
         if (fin_stage_collide.m_is_collide)
