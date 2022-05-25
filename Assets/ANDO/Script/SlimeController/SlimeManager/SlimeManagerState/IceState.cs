@@ -106,14 +106,15 @@ public class IceState : State<SlimeManager>
             float scale = Mathf.Max(scale_min,per * scale_max);
 
             owner.target_scale = new Vector3(scale, scale, scale);
+            owner.transform.localScale = Vector3.one * 0.5f;
 
             owner.t = 0.0f;
 
             float radius_max = 1.0f;
-            float radius_min = 0.5f;
+            float radius_min = 0.9f;
             float radius = Mathf.Max(radius_min, per * radius_max);
 
-            owner.GetComponent<SphereCollider>().radius = radius;
+            owner.GetComponent<SphereCollider>().radius = Mathf.Max(radius_min,scale /2.0f);
 
             GameObject effect = GameObject.Instantiate(owner.cold_effect, owner.transform);
             GameObject.Destroy(effect, 3.0f);

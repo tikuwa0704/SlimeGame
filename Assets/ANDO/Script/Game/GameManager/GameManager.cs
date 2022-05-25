@@ -12,7 +12,7 @@ public interface IGameService
 
     Vector3 GetCrrentCheckPoint();
 
-    void CheckPoint();
+    void GoToCheckPoint();
 
     float GetLimitTime();
 
@@ -144,7 +144,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
     }
     
     //スライムをチェックポイントに戻す処理
-    public void CheckPoint() {
+    public void GoToCheckPoint() {
 
         SlimeManager slimeManager = SlimeManager.Instance;
         GameObject slime = slimeManager.gameObject;
@@ -155,7 +155,7 @@ public class GameManager : StatefulObjectBase<GameManager, E_GAME_MANAGER_STATE>
         //チェックポイントに戻る
         Vector3 point = GetCrrentCheckPoint();
         m_slime.transform.position = point;
-        m_slime.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //m_slime.GetComponent<Rigidbody>().velocity = Vector3.zero;
         //子スライムを生成する氷状態では生成しない
 
         slimeManager.ChangeState(E_SLIMES_STATE.E_NORMAL);

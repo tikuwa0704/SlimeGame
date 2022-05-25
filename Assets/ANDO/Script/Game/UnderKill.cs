@@ -12,7 +12,7 @@ public class UnderKill : MonoBehaviour
         {
             
             //チェックポイントに戻る
-            ServiceLocator<IGameService>.Instance.CheckPoint();
+            ServiceLocator<IGameService>.Instance.GoToCheckPoint();
             
         }
         if (other.CompareTag("SC"))
