@@ -9,6 +9,7 @@ public class stageON : MonoBehaviour
     public GameObject Goal;
     public GameObject Gate;
     public GameObject Fire;
+    public GameObject Panel;
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -18,6 +19,7 @@ public class stageON : MonoBehaviour
             Destroy(Goal.gameObject);
             Destroy(Gate.gameObject);
             Fire.SetActive(true);
+            Panel.SetActive(true);
         }
     }
 }
